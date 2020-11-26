@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020.11.23 19:22:23.068.cpp,C:\Users\Vsevolod\Documents\Borland Studio Projects\Unit1.cpp=D:\Third cource\Game of Life\Unit1.cpp</Transaction>
+    <Transaction>2020.11.23 19:22:23.068.h,C:\Users\Vsevolod\Documents\Borland Studio Projects\Unit1.h=D:\Third cource\Game of Life\Unit1.h</Transaction>
+    <Transaction>2020.11.23 19:22:23.068.dfm,C:\Users\Vsevolod\Documents\Borland Studio Projects\Unit1.dfm=D:\Third cource\Game of Life\Unit1.dfm</Transaction>
+    <Transaction>2020.11.23 19:22:25.515.bdsproj,C:\Users\Vsevolod\Documents\Borland Studio Projects\Project1.bdsproj=D:\Third cource\Game of Life\Project1.bdsproj</Transaction>
+    <Transaction>2020.11.26 12:33:25.730.cpp,D:\Third cource\Game of Life\Unit4.cpp=D:\Third cource\Game of Life\vec.cpp</Transaction>
+    <Transaction>2020.11.26 12:33:25.730.h,D:\Third cource\Game of Life\Unit4.h=D:\Third cource\Game of Life\vec.h</Transaction>
+    <Transaction>2020.11.26 12:34:09.507.cpp,D:\Third cource\Game of Life\Unit2.cpp=D:\Third cource\Game of Life\cell.cpp</Transaction>
+    <Transaction>2020.11.26 12:34:09.507.h,D:\Third cource\Game of Life\Unit2.h=D:\Third cource\Game of Life\cell.h</Transaction>
+    <Transaction>2020.11.26 12:34:51.415.cpp,D:\Third cource\Game of Life\Unit3.cpp=D:\Third cource\Game of Life\grid.cpp</Transaction>
+    <Transaction>2020.11.26 12:34:51.415.h,D:\Third cource\Game of Life\Unit3.h=D:\Third cource\Game of Life\grid.h</Transaction>
+    <Transaction>2020.11.26 12:54:15.795.cpp,D:\Third cource\Game of Life\Unit2.cpp=D:\Third cource\Game of Life\camera.cpp</Transaction>
+    <Transaction>2020.11.26 12:54:15.795.h,D:\Third cource\Game of Life\Unit2.h=D:\Third cource\Game of Life\camera.h</Transaction>
+  </Transactions>
+</BorlandProject>
