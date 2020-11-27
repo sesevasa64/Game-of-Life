@@ -2,15 +2,16 @@
 
 #ifndef cellH
 #define cellH
-#include <Classes.hpp>
+#include"vec.h"
 
 class Cell {
 public:
-	Cell(TPoint p, int color);
+	Cell(vec2f p, TColor color);
+	Cell(vec2i p, TColor color);
 	void draw();
 	static const int size = 40;
 private:
-	TPoint p1, p2;
+	vec2f p1, p2;
 	int color;
 };
 //---------------------------------------------------------------------------

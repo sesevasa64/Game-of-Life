@@ -5,18 +5,18 @@
 
 #include "camera.h"
 
-template<typename T, typename U>
-void Camera::toWorld(vec2<T> cam, vec2<U>& world) {
+void Camera::toWorld(vec2f cam, vec2f& world) {
 	world = cam / scale + offset;
 }
-template<typename T, typename U>
-void Camera::toCamera(vec2<T> world, vec2<U>& cam) {
+void Camera::toCamera(vec2f world, vec2f& cam) {
 	cam = (world - offset) * scale;
 }
-void Camera::Move(vec2i MPos) {
+void Camera::Move(int x, int y) {
+	vec2f MPos(x, y);
 	offset -= (MPos - LMP) / scale;
 }
-void Camera::Zoom(vec2i MPos, int wheeldelta) {
+void Camera::Zoom(int x, int y, int wheeldelta) {
+	vec2f MPos(x, y);
 	toWorld(MPos, bZoom);
 	if (wheeldelta > 0) {
     	scale *= 1.01f;
@@ -27,11 +27,22 @@ void Camera::Zoom(vec2i MPos, int wheeldelta) {
 	toWorld(MPos, aZoom);
 	offset += (bZoom - aZoom);
 }
-void Camera::SetMPos(vec2i MPos) {
-	LMP = MPos;
+void Camera::SetMPos(int x, int y) {
+	LMP = vec2f(x, y);
 }
-vec2f& Camera::Offset() {
-	return offset;
+void Camera::ByKey(WORD &Key) {
+	if (Key == VK_UP) {
+		offset.y -= 10;
+	}
+	else if (Key == VK_DOWN) {
+		offset.y += 10;
+	}
+	else if (Key == VK_LEFT) {
+		offset.x -= 10;
+	}
+	else if (Key == VK_RIGHT) {
+		offset.x += 10;
+	}
 }
 //---------------------------------------------------------------------------
 

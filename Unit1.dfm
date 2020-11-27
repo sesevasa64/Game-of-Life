@@ -12,6 +12,7 @@ object Form1: TForm1
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnMouseDown = FormMouseDown
   OnMouseMove = FormMouseMove
@@ -36,5 +37,11 @@ object Form1: TForm1
     OnTimer = Timer1Timer
     Left = 728
     Top = 416
+  end
+  object Timer2: TTimer
+    Interval = 1500
+    OnTimer = Timer2Timer
+    Left = 728
+    Top = 376
   end
 end
