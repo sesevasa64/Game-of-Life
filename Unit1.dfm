@@ -17,6 +17,7 @@ object Form1: TForm1
   OnMouseDown = FormMouseDown
   OnMouseMove = FormMouseMove
   OnMouseWheel = FormMouseWheel
+  OnPaint = FormPaint
   PixelsPerInch = 96
   TextHeight = 13
   object MainMenu1: TMainMenu

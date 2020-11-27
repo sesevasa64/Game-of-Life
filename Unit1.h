@@ -31,8 +31,8 @@ __published:	// IDE-managed Components
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall Timer2Timer(TObject *Sender);
+	void __fastcall FormPaint(TObject *Sender);
 private:	// User declarations
-	void __fastcall draw();
 	Grid grid;
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);

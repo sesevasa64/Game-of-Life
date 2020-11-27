@@ -46,13 +46,6 @@ void __fastcall TForm1::FormMouseWheel(TObject *Sender, TShiftState Shift,
 	cam.Zoom(MousePos.x, MousePos.y, WheelDelta);
 	Handled = true;
 }
-void __fastcall TForm1::draw() {
-    Canvas->Brush->Color = clWhite;
-	Canvas->Rectangle(-1, -1, ClientWidth+1, ClientHeight+1);
-	Canvas->Brush->Color = clRed;
-
-	grid.draw();
-}
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
@@ -62,7 +55,7 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer1Timer(TObject *Sender)
 {
-	draw();
+	Form1->Repaint();
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer2Timer(TObject *Sender)
@@ -70,5 +63,12 @@ void __fastcall TForm1::Timer2Timer(TObject *Sender)
 	grid.tick();
 }
 //---------------------------------------------------------------------------
-
+void __fastcall TForm1::FormPaint(TObject *Sender)
+{
+	//Canvas->Brush->Color = clWhite;
+	//Canvas->Rectangle(-1, -1, ClientWidth+1, ClientHeight+1);
+	//Canvas->Brush->Color = clRed;
+	grid.draw();
+}
+//---------------------------------------------------------------------------
 
