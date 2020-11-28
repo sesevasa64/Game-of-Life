@@ -24,19 +24,11 @@ static vec2i dv[] = {
 
 int Grid::countNeighbors(vec2i p) {
 	int count = 0;
-	//ofstream myfile("log.txt", ios::app);
-	//myfile << "-----------------------------" << "\n";
-	//myfile << p.x << ", " << p.y << "\n";
-	//myfile << "-----------------------------" << "\n";
 	for (int i = 0; i < 8; i++) {
 		if (cells.find(p + dv[i]) != cells.end()) {
-			//myfile << "++++++++++++++++++++++" << "\n";
-			//myfile << (p + dv[i]).x << ", " << (p + dv[i]).y << "\n";
-			//myfile << "++++++++++++++++++++++" << "\n";
         	count++;
 		}
 	}
-	//myfile << "-----------------------------" << "\n";
 	return count;
 }
 
@@ -64,8 +56,10 @@ void Grid::tick() {
     	cells.erase(*it);
 	}
 	for (vst_it it = visited.begin(); it != visited.end(); it++) {
+		// Если рядом с гипотетической клеткой 3 соседа
+		// то создаем новую клетку
 		if (it->second) {
-			cells[it->first] = new Cell(it->first, clRed);
+        	add_cell(it->first, clRed);
 		}
     }
 }
@@ -84,6 +78,9 @@ void Grid::load_from_file(char *file_name) {
     }
 }
 
+void Grid::add_cell(vec2i pos, TColor color) {
+	cells[pos] = new Cell(pos, color);
+}
 //---------------------------------------------------------------------------
 
 #pragma package(smart_init)

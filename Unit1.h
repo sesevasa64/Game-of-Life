@@ -36,6 +36,7 @@ private:	// User declarations
 	Grid grid;
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
+	Grid& getGrid();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm1 *Form1;

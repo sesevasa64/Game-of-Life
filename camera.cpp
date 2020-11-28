@@ -5,12 +5,6 @@
 
 #include "camera.h"
 
-void Camera::toWorld(vec2f cam, vec2f& world) {
-	world = cam / scale + offset;
-}
-void Camera::toCamera(vec2f world, vec2f& cam) {
-	cam = (world - offset) * scale;
-}
 void Camera::Move(int x, int y) {
 	vec2f MPos(x, y);
 	offset -= (MPos - LMP) / scale;
@@ -43,6 +37,17 @@ void Camera::ByKey(WORD &Key) {
 	else if (Key == VK_RIGHT) {
 		offset.x += 10;
 	}
+}
+//#include<fstream>
+using namespace std;
+void Camera::SelectCell(int x, int y) {
+	vec2i cam(x, y), pos;
+	toWorld(cam, pos);
+	pos.x = 40 * (pos.x / 40);
+	pos.y = 40 * (pos.y / 40);
+	//ofstream log("log.txt", ios::app);
+	//log << pos.x << ", " << pos.y << "\n";
+    Form1->getGrid().add_cell(pos, clRed);
 }
 //---------------------------------------------------------------------------
 

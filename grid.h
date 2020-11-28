@@ -15,6 +15,7 @@ public:
 	void draw();
 	void load_from_file(char *file_name);
 	void save_to_file(char *file_name);
+	void add_cell(vec2i pos, TColor color);
 private:
 	int countNeighbors(vec2i p);
 	std::hash_map<vec2i, Cell*, HashPoint> cells;

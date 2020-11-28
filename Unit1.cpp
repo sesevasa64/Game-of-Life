@@ -12,6 +12,10 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 //---------------------------------------------------------------------------
+Grid& TForm1::getGrid() {
+	return grid;
+}
+//---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
 	: TForm(Owner)
 {
@@ -20,28 +24,57 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
-	Camera::get().ByKey(Key);
+	// Если нажата кнопка P
+	if (Key == 0x50) {
+		Timer2->Enabled = !Timer2->Enabled;
+	}
+	// Кнопка +
+	else if (Key == VK_OEM_PLUS) {
+		Timer2->Interval -= 250u;
+	}
+	// Кнопка -
+	else if (Key == VK_OEM_MINUS) {
+		Timer2->Interval += 250u;
+	}
+	// Стрелочки
+	else {
+		Camera::get().ByKey(Key);
+	}
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormMouseDown(TObject *Sender, TMouseButton Button,
 	  TShiftState Shift, int X, int Y)
 {
-	Camera::get().SetMPos(X, Y);
+	TPoint mpos(X, Y);
+	::ScreenToClient(Form1->Handle, &mpos);
+	Camera& cam = Camera::get();
+	if (Shift.Contains(ssLeft)) {
+		cam.SetMPos(mpos.x, mpos.y);
+	}
+	else {
+    	cam.SelectCell(mpos.x, mpos.y);
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormMouseMove(TObject *Sender, TShiftState Shift, int X,
 	  int Y)
 {
+	TPoint mpos(X, Y);
+	::ScreenToClient(Form1->Handle, &mpos);
 	Camera& cam = Camera::get();
 	if (Shift.Contains(ssLeft)) {
-		cam.Move(X, Y);
-		cam.SetMPos(X, Y);
+		cam.Move(mpos.x, mpos.y);
+		cam.SetMPos(mpos.x, mpos.y);
 	}
 }
+// Скорее всего проблема в том что MousePos возвращает координаты мышки
+// относительно винды а не конкретного окна
+// https://www.google.com/search?client=firefox-b-d&q=c%2B%2B+builder+mouse+position+relative+window
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormMouseWheel(TObject *Sender, TShiftState Shift,
-      int WheelDelta, TPoint &MousePos, bool &Handled)
+	  int WheelDelta, TPoint &MousePos, bool &Handled)
 {
+	::ScreenToClient(Form1->Handle, &MousePos);
 	Camera& cam = Camera::get();
 	cam.Zoom(MousePos.x, MousePos.y, WheelDelta);
 	Handled = true;
@@ -65,10 +98,6 @@ void __fastcall TForm1::Timer2Timer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormPaint(TObject *Sender)
 {
-	//Canvas->Brush->Color = clWhite;
-	//Canvas->Rectangle(-1, -1, ClientWidth+1, ClientHeight+1);
-	//Canvas->Brush->Color = clRed;
 	grid.draw();
 }
 //---------------------------------------------------------------------------
-

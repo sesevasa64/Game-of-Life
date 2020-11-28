@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Game of Life'
   ClientHeight = 496
   ClientWidth = 771
   Color = clBtnFace
