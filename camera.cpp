@@ -5,12 +5,12 @@
 
 #include "camera.h"
 
-void Camera::Move(int x, int y) {
-	vec2f MPos(x, y);
+void Camera::Move(const TPoint& pos) {
+	vec2i MPos(pos.x, pos.y);
 	offset -= (MPos - LMP) / scale;
 }
-void Camera::Zoom(int x, int y, int wheeldelta) {
-	vec2f MPos(x, y);
+void Camera::Zoom(const TPoint& pos, int wheeldelta) {
+	vec2f MPos(pos.x, pos.y);
 	toWorld(MPos, bZoom);
 	if (wheeldelta > 0) {
     	scale *= 1.01f;
@@ -21,8 +21,8 @@ void Camera::Zoom(int x, int y, int wheeldelta) {
 	toWorld(MPos, aZoom);
 	offset += (bZoom - aZoom);
 }
-void Camera::SetMPos(int x, int y) {
-	LMP = vec2f(x, y);
+void Camera::SetMPos(const TPoint& pos) {
+	LMP = vec2f(pos.x, pos.y);
 }
 void Camera::ByKey(WORD &Key) {
 	if (Key == VK_UP) {
@@ -38,15 +38,17 @@ void Camera::ByKey(WORD &Key) {
 		offset.x += 10;
 	}
 }
-//#include<fstream>
+#include<fstream>
 using namespace std;
-void Camera::SelectCell(int x, int y) {
-	vec2i cam(x, y), pos;
+void Camera::SelectCell(const TPoint& mpos) {
+	vec2f cam(mpos.x, mpos.y);
+	vec2i pos;
 	toWorld(cam, pos);
+	ofstream log("log.txt", ios::app);
+	log << "World b: " << pos.x << ", " << pos.y << "\n";
 	pos.x = 40 * (pos.x / 40);
 	pos.y = 40 * (pos.y / 40);
-	//ofstream log("log.txt", ios::app);
-	//log << pos.x << ", " << pos.y << "\n";
+	log << "World a: " << pos.x << ", " << pos.y << "\n";
     Form1->getGrid().add_cell(pos, clRed);
 }
 //---------------------------------------------------------------------------

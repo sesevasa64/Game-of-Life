@@ -41,19 +41,26 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 		Camera::get().ByKey(Key);
 	}
 }
+#include<fstream>
+using namespace std;
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormMouseDown(TObject *Sender, TMouseButton Button,
 	  TShiftState Shift, int X, int Y)
 {
 	TPoint mpos(X, Y);
-	::ScreenToClient(Form1->Handle, &mpos);
 	Camera& cam = Camera::get();
+	//::ScreenToClient(Form1->Handle, &mpos);
 	if (Shift.Contains(ssLeft)) {
-		cam.SetMPos(mpos.x, mpos.y);
+    	::ScreenToClient(Form1->Handle, &mpos);
+		cam.SetMPos(mpos);
 	}
 	else {
-    	cam.SelectCell(mpos.x, mpos.y);
-    }
+		ofstream log("log.txt", ios::app);
+		log << "Cam before: " << mpos.x << ", " << mpos.y << "\n";
+		//::ScreenToClient(Form1->Handle, &mpos);
+		log << "Cam after: " << mpos.x << ", " << mpos.y << "\n";
+		cam.SelectCell(mpos);
+	}
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormMouseMove(TObject *Sender, TShiftState Shift, int X,
@@ -63,20 +70,17 @@ void __fastcall TForm1::FormMouseMove(TObject *Sender, TShiftState Shift, int X,
 	::ScreenToClient(Form1->Handle, &mpos);
 	Camera& cam = Camera::get();
 	if (Shift.Contains(ssLeft)) {
-		cam.Move(mpos.x, mpos.y);
-		cam.SetMPos(mpos.x, mpos.y);
+		cam.Move(mpos);
+		cam.SetMPos(mpos);
 	}
 }
-// Скорее всего проблема в том что MousePos возвращает координаты мышки
-// относительно винды а не конкретного окна
-// https://www.google.com/search?client=firefox-b-d&q=c%2B%2B+builder+mouse+position+relative+window
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormMouseWheel(TObject *Sender, TShiftState Shift,
 	  int WheelDelta, TPoint &MousePos, bool &Handled)
 {
 	::ScreenToClient(Form1->Handle, &MousePos);
 	Camera& cam = Camera::get();
-	cam.Zoom(MousePos.x, MousePos.y, WheelDelta);
+	cam.Zoom(MousePos, WheelDelta);
 	Handled = true;
 }
 //---------------------------------------------------------------------------

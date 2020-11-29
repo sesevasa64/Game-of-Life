@@ -20,18 +20,18 @@ public:
 		return camera;
 	}
 	template<class T, class U>
-	void Camera::toWorld(vec2<T> cam, vec2<U>& world) {
+	void Camera::toWorld(vec2<T>& cam, vec2<U>& world) {
 		world = vec2<U>(cam / scale + offset);
 	}
 	template<class T, class U>
-	void Camera::toCamera(vec2<T> world, vec2<U>& cam) {
+	void Camera::toCamera(vec2<T>& world, vec2<U>& cam) {
 		cam = vec2<U>((world - offset) * scale);
 	}
-	void SetMPos(int x, int y);
-	void Zoom(int x, int y, int wheeldelta);
-	void Move(int x, int y);
+	void SetMPos(const TPoint& pos);
+	void Zoom(const TPoint& pos, int wheeldelta);
+	void Move(const TPoint& pos);
 	void ByKey(WORD &Key);
-	void SelectCell(int x, int y);
+	void SelectCell(const TPoint& pos);
 };
 //---------------------------------------------------------------------------
 #endif

@@ -53,6 +53,7 @@ void Grid::tick() {
 		}
 	}
 	for (list_it it = erase.begin(); it != erase.end(); it++) {
+    	delete (*it)->second;
     	cells.erase(*it);
 	}
 	for (vst_it it = visited.begin(); it != visited.end(); it++) {

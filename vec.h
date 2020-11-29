@@ -58,7 +58,7 @@ vec2i operator+(vec2i v1, vec2i v2) {
 class HashPoint {
 public:
 	HashPoint() {}
-	static const size_t bucket_size = 50; // 10
+	static const size_t bucket_size = 32; // 10
 	static const size_t min_buckets = 8192; // (1 << 10)
 
 	size_t operator()(const vec2i &key);
