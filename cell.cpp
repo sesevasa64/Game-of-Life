@@ -10,9 +10,8 @@ Cell::Cell(vec2i p, TColor color)
 
 void Cell::draw() {
 	Camera& cam = Camera::get();
-	vec2i a, b;
-	cam.toCamera(p1, a);
-	cam.toCamera(p2, b);
+	vec2i a = cam.toCamera(p1);
+	vec2i b = cam.toCamera(p2);
 	TRect r(a.x, a.y, b.x, b.y);
 	Form1->Canvas->Brush->Color = color;
 	Form1->Canvas->FillRect(r);

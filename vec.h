@@ -2,7 +2,6 @@
 
 #ifndef vecH
 #define vecH
-
 #include <Classes.hpp>
 
 template<class T>

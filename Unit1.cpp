@@ -12,8 +12,8 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 //---------------------------------------------------------------------------
-Grid& TForm1::getGrid() {
-	return grid;
+Colony& TForm1::getColony() {
+	return colony;
 }
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -41,24 +41,17 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 		Camera::get().ByKey(Key);
 	}
 }
-#include<fstream>
-using namespace std;
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormMouseDown(TObject *Sender, TMouseButton Button,
 	  TShiftState Shift, int X, int Y)
 {
 	TPoint mpos(X, Y);
 	Camera& cam = Camera::get();
-	//::ScreenToClient(Form1->Handle, &mpos);
 	if (Shift.Contains(ssLeft)) {
     	::ScreenToClient(Form1->Handle, &mpos);
 		cam.SetMPos(mpos);
 	}
 	else {
-		ofstream log("log.txt", ios::app);
-		log << "Cam before: " << mpos.x << ", " << mpos.y << "\n";
-		//::ScreenToClient(Form1->Handle, &mpos);
-		log << "Cam after: " << mpos.x << ", " << mpos.y << "\n";
 		cam.SelectCell(mpos);
 	}
 }
@@ -74,6 +67,7 @@ void __fastcall TForm1::FormMouseMove(TObject *Sender, TShiftState Shift, int X,
 		cam.SetMPos(mpos);
 	}
 }
+
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormMouseWheel(TObject *Sender, TShiftState Shift,
 	  int WheelDelta, TPoint &MousePos, bool &Handled)
@@ -86,7 +80,6 @@ void __fastcall TForm1::FormMouseWheel(TObject *Sender, TShiftState Shift,
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
-	grid.load_from_file("input.txt");
 	Form1->DoubleBuffered = true;
 }
 //---------------------------------------------------------------------------
@@ -97,11 +90,32 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer2Timer(TObject *Sender)
 {
-	grid.tick();
+	static int i = 0;
+	colony.tick();
+	Label4->Caption = IntToStr(colony.size());
+	Label1->Caption = IntToStr(i++);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormPaint(TObject *Sender)
 {
-	grid.draw();
+	colony.draw();
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::N3Click(TObject *Sender)
+{
+	Timer2->Enabled = false;
+	OpenDialog1->Execute();
+	AnsiString str = OpenDialog1->FileName;
+	colony = Manager::load_colony(str);
+	Timer2->Enabled = true;	
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::N4Click(TObject *Sender)
+{
+	Timer2->Enabled = false;
+	SaveDialog1->Execute();
+	AnsiString str = SaveDialog1->FileName;
+	Manager::save_colony(colony, str);
+	Timer2->Enabled = true;
 }
 //---------------------------------------------------------------------------

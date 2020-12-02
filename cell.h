@@ -3,15 +3,16 @@
 #ifndef cellH
 #define cellH
 #include "vec.h"
+#include <Graphics.hpp>
 
 class Cell {
 public:
+	static const int size = 40;
 	Cell(vec2i p, TColor color);
 	void draw();
-	static const int size = 40;
 private:
 	vec2i p1, p2;
-	int color;
+	TColor color;
 };
 //---------------------------------------------------------------------------
 #endif

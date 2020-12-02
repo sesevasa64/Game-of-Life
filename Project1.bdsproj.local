@@ -13,5 +13,10 @@
     <Transaction>2020.11.26 12:34:51.415.h,D:\Third cource\Game of Life\Unit3.h=D:\Third cource\Game of Life\grid.h</Transaction>
     <Transaction>2020.11.26 12:54:15.795.cpp,D:\Third cource\Game of Life\Unit2.cpp=D:\Third cource\Game of Life\camera.cpp</Transaction>
     <Transaction>2020.11.26 12:54:15.795.h,D:\Third cource\Game of Life\Unit2.h=D:\Third cource\Game of Life\camera.h</Transaction>
+    <Transaction>2020.12.01 23:40:43.518.cpp,D:\Third cource\Game of Life\Unit2.cpp=D:\Third cource\Game of Life\manager.cpp</Transaction>
+    <Transaction>2020.12.01 23:40:43.518.h,D:\Third cource\Game of Life\Unit2.h=D:\Third cource\Game of Life\manager.h</Transaction>
+    <Transaction>2020.12.02 00:03:42.717.cpp,D:\Third cource\Game of Life\grid.cpp=D:\Third cource\Game of Life\colony.cpp</Transaction>
+    <Transaction>2020.12.02 00:03:42.717.h,D:\Third cource\Game of Life\grid.h=D:\Third cource\Game of Life\colony.h</Transaction>
+    <Transaction>2020.12.02 00:13:30.327.cpp,D:\Third cource\Game of Life\Unit2.cpp=</Transaction>
   </Transactions>
 </BorlandProject>

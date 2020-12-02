@@ -19,13 +19,13 @@ public:
 		static Camera camera;
 		return camera;
 	}
-	template<class T, class U>
-	void Camera::toWorld(vec2<T>& cam, vec2<U>& world) {
-		world = vec2<U>(cam / scale + offset);
+	template<class T>
+	vec2<T> Camera::toWorld(vec2<T>& cam) {
+		return cam / scale + offset;
 	}
-	template<class T, class U>
-	void Camera::toCamera(vec2<T>& world, vec2<U>& cam) {
-		cam = vec2<U>((world - offset) * scale);
+	template<class T>
+	vec2<T> Camera::toCamera(vec2<T>& world) {
+		return (world - offset) * scale;
 	}
 	void SetMPos(const TPoint& pos);
 	void Zoom(const TPoint& pos, int wheeldelta);
