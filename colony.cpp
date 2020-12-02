@@ -63,10 +63,19 @@ void Colony::remove(cell_it it) {
 	cells.erase(it);
 }
 
-void Colony::draw() {
-	for (cell_it it = cells.begin(); it != cells.end(); it++) {
-		it->second->draw();
+void Colony::remove(vec2i pos) {
+	for (int i = 0; i < 8; i++) {
+	vec2i key = pos + dv[i];
+		if (--neighbors[key] == 0) {
+			neighbors.erase(key);
+		}
 	}
+	delete cells[pos];
+	cells.erase(pos);
+}
+
+bool Colony::isExist(vec2i pos) {
+	return cells.find(pos) != cells.end();
 }
 
 size_t Colony::size() {
@@ -79,6 +88,12 @@ const_cell_it Colony::begin() {
 
 const_cell_it Colony::end() {
 	return cells.end();
+}
+
+void Colony::draw() {
+	for (cell_it it = cells.begin(); it != cells.end(); it++) {
+		it->second->draw();
+	}
 }
 //---------------------------------------------------------------------------
 

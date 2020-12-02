@@ -16,7 +16,9 @@ public:
 	void tick();
 	void draw();
 	void create(vec2i pos, TColor color);
+	void remove(vec2i pos);
 	void remove(cell_it it);
+	bool isExist(vec2i pos);
 	const_cell_it begin();
 	const_cell_it end();
 	size_t size();

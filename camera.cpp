@@ -6,24 +6,27 @@
 #include "camera.h"
 
 void Camera::Move(const TPoint& pos) {
-	vec2i MPos(pos.x, pos.y);
-	offset -= (MPos - LMP) / scale;
+	vec2i mpos(pos.x, pos.y);
+	offset -= (mpos - LMP) / scale;
 }
+
 void Camera::Zoom(const TPoint& pos, int wheeldelta) {
-	vec2f MPos(pos.x, pos.y);
-	bZoom = toWorld(MPos);
+	vec2f mpos(pos.x, pos.y);
+	bZoom = toWorld(mpos);
 	if (wheeldelta > 0) {
-    	scale *= 1.01f;
+		scale *= 1.01f;
 	}
 	else {
-    	scale *= 0.99f;
+		scale *= 0.99f;
 	}
-	aZoom = toWorld(MPos);
+	aZoom = toWorld(mpos);
 	offset += (bZoom - aZoom);
 }
+
 void Camera::SetMPos(const TPoint& pos) {
 	LMP = vec2f(pos.x, pos.y);
 }
+
 void Camera::ByKey(WORD &Key) {
 	if (Key == VK_UP) {
 		offset.y -= 10;
@@ -38,12 +41,19 @@ void Camera::ByKey(WORD &Key) {
 		offset.x += 10;
 	}
 }
+
 void Camera::SelectCell(const TPoint& mpos) {
 	vec2f cam(mpos.x, mpos.y);
 	vec2i pos = toWorld(cam);
 	pos.x = 40 * floor(pos.x / 40.);
 	pos.y = 40 * floor(pos.y / 40.);
-	Form1->getColony().create(pos, clRed);
+	Colony& colony = Form1->getColony();
+	if (colony.isExist(pos)) {
+    	colony.remove(pos);
+	}
+	else {
+		colony.create(pos, clRed);
+	}
 }
 //---------------------------------------------------------------------------
 
