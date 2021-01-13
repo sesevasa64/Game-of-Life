@@ -15,10 +15,10 @@ typedef list<cell_it>::iterator erase_it;
 typedef list<vec2i>::iterator create_it;
 
 static vec2i dv[] = {
-	vec2i( 40,  40), vec2i( 40,  0),
-	vec2i( 40, -40), vec2i( 0, -40),
-	vec2i(-40, -40), vec2i(-40,  0),
-	vec2i(-40,  40), vec2i( 0,  40)
+	vec2i( 1,  1), vec2i( 1,  0),
+	vec2i( 1, -1), vec2i( 0, -1),
+	vec2i(-1, -1), vec2i(-1,  0),
+	vec2i(-1,  1), vec2i( 0,  1)
 };
 
 void Colony::tick() {

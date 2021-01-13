@@ -74,6 +74,9 @@ void __fastcall TForm1::FormMouseWheel(TObject *Sender, TShiftState Shift,
 	::ScreenToClient(Form1->Handle, &MousePos);
 	Camera& cam = Camera::get();
 	cam.Zoom(MousePos, WheelDelta);
+	vec2i c1(0, 0), c2(ClientWidth, ClientHeight);
+	vec2i w1 = cam.toWorld(c1), w2 = cam.toWorld(c2);
+	grid.updateBorders(c1, c2);
 	Handled = true;
 }
 //---------------------------------------------------------------------------

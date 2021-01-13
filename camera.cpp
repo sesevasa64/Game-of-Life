@@ -45,8 +45,8 @@ void Camera::ByKey(WORD &Key) {
 void Camera::SelectCell(const TPoint& mpos) {
 	vec2f cam(mpos.x, mpos.y);
 	vec2i pos = toWorld(cam);
-	pos.x = 40 * floor(pos.x / 40.);
-	pos.y = 40 * floor(pos.y / 40.);
+	pos.x = pos.x / 40.;
+	pos.y = pos.y / 40.;
 	Colony& colony = Form1->getColony();
 	if (colony.isExist(pos)) {
     	colony.remove(pos);

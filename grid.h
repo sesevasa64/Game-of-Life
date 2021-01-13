@@ -13,12 +13,13 @@ public:
 	void updateBorders(vec2i c1, vec2i c2);
 	void updateSize(float scale);
 	void drawGrid();
+	void drawCell(Cell *cell);
 	void drawColony(Colony& colony);
+	static const int cell_size = 40;
 private:
-	static int cellSize = 40;
 	TCanvas *Canvas;
-	float size, p;
 	vec2i w1, w2;
+	int p;
 };
 //---------------------------------------------------------------------------
 #endif

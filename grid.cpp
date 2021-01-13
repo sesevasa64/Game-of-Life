@@ -31,7 +31,7 @@ void Grid::updateSize(float scale) {
 }
 
 void Grid::drawGrid() {
-	float size = p * 40.;
+	float size = p * cell_size;
 	if (size != 0) {
     	Camera& cam = Camera::get();
 		w1.x = size * floor(w1.x / size);
@@ -57,14 +57,19 @@ void Grid::drawGrid() {
 
 void Grid::drawColony(Colony& colony) {
 	for (const_cell_it it = colony.begin(); it != colony.end(); it++) {
-		Cell *cell = it->second;
-		Camera& cam = Camera::get();
-		vec2i a = cam.toCamera(cell->p1 * 1);
-		vec2i b = cam.toCamera(cell->p2 * 1);
-		Canvas->Brush->Color = cell->color;
-		TRect r(a.x, a.y, b.x, b.y);
-		Canvas->FillRect(r);
+		drawCell(it->second);
 	}
+}
+
+void Grid::drawCell(Cell *cell) {
+	Camera& cam = Camera::get();
+	vec2i c1 = cell->p1 * cell_size;
+	vec2i c2 = cell->p2 * cell_size;
+	vec2i a = cam.toCamera(c1);
+	vec2i b = cam.toCamera(c2);
+	Canvas->Brush->Color = cell->color;
+	TRect r(a.x, a.y, b.x, b.y);
+	Canvas->FillRect(r);
 }
 
 //---------------------------------------------------------------------------
