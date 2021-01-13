@@ -1,6 +1,5 @@
 //---------------------------------------------------------------------------
 
-
 #pragma hdrstop
 #include"camera.h"
 #include"cell.h"
@@ -16,6 +15,7 @@ void Cell::draw() {
 	Form1->Canvas->Brush->Color = color;
 	Form1->Canvas->FillRect(r);
 }
+
 //---------------------------------------------------------------------------
 
 #pragma package(smart_init)

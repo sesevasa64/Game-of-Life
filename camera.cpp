@@ -1,31 +1,30 @@
 //---------------------------------------------------------------------------
 
-
 #pragma hdrstop
 #include "math.h"
 #include "camera.h"
 
 void Camera::Move(const TPoint& pos) {
 	vec2i mpos(pos.x, pos.y);
-	offset -= (mpos - LMP) / scale;
+	offset -= (mpos - lastMousePosition) / scale;
 }
 
 void Camera::Zoom(const TPoint& pos, int wheeldelta) {
 	vec2f mpos(pos.x, pos.y);
-	bZoom = toWorld(mpos);
+	beforeZoom = toWorld(mpos);
 	if (wheeldelta > 0) {
 		scale *= 1.01f;
 	}
 	else {
 		scale *= 0.99f;
 	}
-	aZoom = toWorld(mpos);
-	offset += (bZoom - aZoom);
+	afterZoom = toWorld(mpos);
+	offset += (beforeZoom - afterZoom);
 	Form1->Label6->Caption = FloatToStr(scale);
 }
 
-void Camera::SetMpos(const TPoint& pos) {
-	LMP = vec2f(pos.x, pos.y);
+void Camera::SetMousePosition(const TPoint& pos) {
+	lastMousePosition = vec2f(pos.x, pos.y);
 }
 
 void Camera::ByKey(WORD &Key) {
@@ -56,6 +55,7 @@ void Camera::SelectCell(const TPoint& mpos) {
 		colony.create(pos, clRed);
 	}
 }
+
 //---------------------------------------------------------------------------
 
 #pragma package(smart_init)

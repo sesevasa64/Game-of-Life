@@ -46,7 +46,7 @@ void __fastcall TForm1::FormMouseDown(TObject *Sender, TMouseButton Button,
 	Camera& cam = Camera::get();
 	if (Shift.Contains(ssLeft)) {
     	::ScreenToClient(Form1->Handle, &mpos);
-		cam.SetMpos(mpos);
+		cam.SetMousePosition(mpos);
 	}
 	else {
 		cam.SelectCell(mpos);
@@ -61,7 +61,7 @@ void __fastcall TForm1::FormMouseMove(TObject *Sender, TShiftState Shift, int X,
 	Camera& cam = Camera::get();
 	if (Shift.Contains(ssLeft)) {
 		cam.Move(mpos);
-		cam.SetMpos(mpos);
+		cam.SetMousePosition(mpos);
 	}
 }
 //---------------------------------------------------------------------------

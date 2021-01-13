@@ -1,6 +1,5 @@
 //---------------------------------------------------------------------------
 
-
 #pragma hdrstop
 #include <fstream>
 #include "manager.h"
@@ -15,6 +14,7 @@ Colony Manager::load_colony(AnsiString& file_name) {
 	}
 	return colony;
 }
+
 void Manager::save_colony(Colony& colony, AnsiString& file_name) {
 	ofstream file(file_name.c_str());
 	for (const_cell_it it = colony.begin(); it != colony.end(); it++) {

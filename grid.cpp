@@ -1,6 +1,4 @@
 //---------------------------------------------------------------------------
-
-
 #pragma hdrstop
 #include "grid.h"
 #include "camera.h"
@@ -11,6 +9,7 @@ void Grid::updateBorders(vec2i c1, vec2i c2) {
 	w2 = cam.toWorld(c2);
 	updateArray();
 }
+
 void Grid::updateSize(float scale) {
 	if (scale < 0.14) {
 		p = 0;

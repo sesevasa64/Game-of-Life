@@ -1,6 +1,4 @@
 //---------------------------------------------------------------------------
-
-
 #pragma hdrstop
 
 #include <list>
@@ -8,6 +6,7 @@
 #include <Graphics.hpp>
 #include <Dialogs.hpp>
 #include "colony.h"
+
 using namespace std;
 
 typedef hash_map<vec2i, int, HashPoint>::iterator n_it;
@@ -52,6 +51,10 @@ void Colony::create(vec2i pos, TColor color) {
 	cells[pos] = new Cell(pos, color);
 }
 
+void Colony::remove(vec2i pos) {
+	remove(cells.find(pos));
+}
+
 void Colony::remove(cell_it it) {
 	for (int i = 0; i < 8; i++) {
 		vec2i key = it->first + dv[i];
@@ -61,17 +64,6 @@ void Colony::remove(cell_it it) {
 	}
 	delete it->second;
 	cells.erase(it);
-}
-
-void Colony::remove(vec2i pos) {
-	for (int i = 0; i < 8; i++) {
-	vec2i key = pos + dv[i];
-		if (--neighbors[key] == 0) {
-			neighbors.erase(key);
-		}
-	}
-	delete cells[pos];
-	cells.erase(pos);
 }
 
 bool Colony::isExist(vec2i pos) {
@@ -95,6 +87,6 @@ void Colony::draw() {
 		it->second->draw();
 	}
 }
-//---------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------
 #pragma package(smart_init)
