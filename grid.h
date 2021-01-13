@@ -15,6 +15,7 @@ public:
 	void drawGrid();
 	void drawColony(Colony& colony);
 private:
+	static int cellSize = 40;
 	TCanvas *Canvas;
 	float size, p;
 	vec2i w1, w2;

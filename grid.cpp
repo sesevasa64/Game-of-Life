@@ -57,7 +57,13 @@ void Grid::drawGrid() {
 
 void Grid::drawColony(Colony& colony) {
 	for (const_cell_it it = colony.begin(); it != colony.end(); it++) {
-		it->second->draw();
+		Cell *cell = it->second;
+		Camera& cam = Camera::get();
+		vec2i a = cam.toCamera(cell->p1 * 1);
+		vec2i b = cam.toCamera(cell->p2 * 1);
+		Canvas->Brush->Color = cell->color;
+		TRect r(a.x, a.y, b.x, b.y);
+		Canvas->FillRect(r);
 	}
 }
 

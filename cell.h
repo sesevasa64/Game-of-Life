@@ -10,7 +10,6 @@ public:
 	static const int size = 40;
 	Cell(vec2i p, TColor color);
 	void draw();
-private:
 	vec2i p1, p2;
 	TColor color;
 };
