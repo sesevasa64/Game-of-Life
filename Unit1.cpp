@@ -14,7 +14,7 @@
 TForm1 *Form1;
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
-	: TForm(Owner)
+	: TForm(Owner), grid(Form1->Canvas)
 {
 }
 //---------------------------------------------------------------------------
@@ -63,6 +63,9 @@ void __fastcall TForm1::FormMouseMove(TObject *Sender, TShiftState Shift, int X,
 		cam.Move(mpos);
 		cam.SetMousePosition(mpos);
 	}
+	vec2i c1(0, 0), c2(ClientWidth, ClientHeight);
+	vec2i w1 = cam.toWorld(c1), w2 = cam.toWorld(c2);
+	grid.updateBorders(c1, c2);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormMouseWheel(TObject *Sender, TShiftState Shift,
@@ -95,40 +98,8 @@ void __fastcall TForm1::Timer2Timer(TObject *Sender)
 void __fastcall TForm1::FormPaint(TObject *Sender)
 {
 	Camera& cam = Camera::get();
-	vec2i c1(0, 0), c2(ClientWidth, ClientHeight);
-	vec2i w1 = cam.toWorld(c1), w2 = cam.toWorld(c2);
-	int p = 1;
-	float scale = cam.getScale();
-	if (scale < 0.14) {
-		p = 0;
-	}
-	else if (scale < 0.26) {
-		p = 4;
-	}
-	else if (scale < 0.475) {
-		p = 2;
-	}
-	float size = p * 40.;
-	if (size != 0) {
-		w1.x = size * floor(w1.x / size);
-		w1.y = size * floor(w1.y / size);
-		w2.x = size * ceil(w2.x / size);
-		w2.y = size * ceil(w2.y / size);
-		for (int x = w1.x; x < w2.x; x += size) {
-			vec2i p1(x, w1.y), p2(x, w2.y);
-			vec2i c1 = cam.toCamera(p1);
-			vec2i c2 = cam.toCamera(p2);
-			Canvas->MoveTo(c1.x, c1.y);
-			Canvas->LineTo(c2.x, c2.y);
-		}
-		for (int y = w1.y; y < w2.y; y += size) {
-			vec2i p1(w1.x, y), p2(w2.x, y);
-			vec2i c1 = cam.toCamera(p1);
-			vec2i c2 = cam.toCamera(p2);
-			Canvas->MoveTo(c1.x, c1.y);
-			Canvas->LineTo(c2.x, c2.y);
-		}
-	}
+	grid.updateSize(cam.getScale());
+	grid.draw();
 	colony.draw();
 }
 //---------------------------------------------------------------------------

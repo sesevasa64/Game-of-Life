@@ -12,6 +12,7 @@
 #include <ExtCtrls.hpp>
 #include <Dialogs.hpp>
 #include "manager.h"
+#include "grid.h"
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -49,6 +50,7 @@ __published:	// IDE-managed Components
 	void __fastcall N6Click(TObject *Sender);
 private:	// User declarations
 	Colony colony;
+	Grid grid;
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
 	Colony& getColony() { return colony; };

@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
+#include "math.h"
 #include "grid.h"
 #include "camera.h"
 
@@ -7,7 +8,6 @@ void Grid::updateBorders(vec2i c1, vec2i c2) {
 	Camera &cam = Camera::get();
 	w1 = cam.toWorld(c1);
 	w2 = cam.toWorld(c2);
-	updateArray();
 }
 
 void Grid::updateSize(float scale) {
@@ -20,27 +20,15 @@ void Grid::updateSize(float scale) {
 	else if (scale < 0.475) {
 		p = 2;
 	}
-	updateArray();
-}
-void Grid::updateArray() {
-
-}
-/*
-void Grid::update(float scale) {
-	if (scale < 0.14) {
-		p = 0;
-	}
-	else if (scale < 0.26) {
-		p = 4;
-	}
-	else if (scale < 0.475) {
-		p = 2;
-	}
+	else {
+        p = 1;
+    }
 }
 
 void Grid::draw() {
 	float size = p * 40.;
 	if (size != 0) {
+    	Camera& cam = Camera::get();
 		w1.x = size * floor(w1.x / size);
 		w1.y = size * floor(w1.y / size);
 		w2.x = size * ceil(w2.x / size);
@@ -61,7 +49,7 @@ void Grid::draw() {
 		}
 	}
 }
-*/
+
 //---------------------------------------------------------------------------
 
 #pragma package(smart_init)
