@@ -21,9 +21,10 @@ void Camera::Zoom(const TPoint& pos, int wheeldelta) {
 	}
 	aZoom = toWorld(mpos);
 	offset += (bZoom - aZoom);
+	Form1->Label6->Caption = FloatToStr(scale);
 }
 
-void Camera::SetMPos(const TPoint& pos) {
+void Camera::SetMpos(const TPoint& pos) {
 	LMP = vec2f(pos.x, pos.y);
 }
 

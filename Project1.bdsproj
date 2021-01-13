@@ -164,6 +164,7 @@
         <FILE FILENAME="colony.cpp" CONTAINERID="CCompiler" LOCALCOMMAND="" UNITNAME="colony" FORMNAME="" DESIGNCLASS="" ADDITIONAL="colony.h"/>
         <FILE FILENAME="camera.cpp" CONTAINERID="CCompiler" LOCALCOMMAND="" UNITNAME="camera" FORMNAME="" DESIGNCLASS="" ADDITIONAL="camera.h"/>
         <FILE FILENAME="manager.cpp" CONTAINERID="CCompiler" LOCALCOMMAND="" UNITNAME="manager" FORMNAME="" DESIGNCLASS="" ADDITIONAL="manager.h"/>
+        <FILE FILENAME="grid.cpp" CONTAINERID="CCompiler" LOCALCOMMAND="" UNITNAME="grid" FORMNAME="" DESIGNCLASS="" ADDITIONAL="grid.h"/>
       </FILELIST>
       <IDEOPTIONS>
         <VersionInfo>

@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Game of Life'
-  ClientHeight = 536
+  ClientHeight = 556
   ClientWidth = 771
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,7 +22,7 @@ object Form1: TForm1
   TextHeight = 13
   object Label1: TLabel
     Left = 100
-    Top = 0
+    Top = 27
     Width = 9
     Height = 19
     Caption = '0'
@@ -35,7 +35,7 @@ object Form1: TForm1
   end
   object Label2: TLabel
     Left = 8
-    Top = 0
+    Top = 27
     Width = 86
     Height = 19
     Caption = #1055#1086#1082#1086#1083#1077#1085#1080#1077':'
@@ -48,7 +48,7 @@ object Form1: TForm1
   end
   object Label3: TLabel
     Left = 8
-    Top = 25
+    Top = 52
     Width = 58
     Height = 19
     Caption = #1050#1083#1077#1090#1086#1082':'
@@ -61,10 +61,36 @@ object Form1: TForm1
   end
   object Label4: TLabel
     Left = 72
-    Top = 25
+    Top = 52
     Width = 9
     Height = 19
     Caption = '0'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label5: TLabel
+    Left = 8
+    Top = 2
+    Width = 33
+    Height = 19
+    Caption = #1047#1091#1084':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label6: TLabel
+    Left = 47
+    Top = 2
+    Width = 9
+    Height = 19
+    Caption = '1'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -87,6 +113,10 @@ object Form1: TForm1
       end
       object N5: TMenuItem
         Caption = #1057#1090#1077#1088#1077#1090#1100' '#1074#1089#1077
+      end
+      object N6: TMenuItem
+        Caption = #1055#1072#1091#1079#1072
+        OnClick = N6Click
       end
     end
     object N2: TMenuItem

@@ -30,6 +30,9 @@ __published:	// IDE-managed Components
 	TOpenDialog *OpenDialog1;
 	TSaveDialog *SaveDialog1;
 	TMenuItem *N5;
+	TLabel *Label5;
+	TLabel *Label6;
+	TMenuItem *N6;
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall FormMouseDown(TObject *Sender, TMouseButton Button,
           TShiftState Shift, int X, int Y);
@@ -43,11 +46,12 @@ __published:	// IDE-managed Components
 	void __fastcall FormPaint(TObject *Sender);
 	void __fastcall N3Click(TObject *Sender);
 	void __fastcall N4Click(TObject *Sender);
+	void __fastcall N6Click(TObject *Sender);
 private:	// User declarations
 	Colony colony;
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
-	Colony& getColony();
+	Colony& getColony() { return colony; };
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm1 *Form1;

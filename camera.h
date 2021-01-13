@@ -27,11 +27,12 @@ public:
 	vec2<T> Camera::toCamera(vec2<T>& world) {
 		return (world - offset) * scale;
 	}
-	void SetMPos(const TPoint& pos);
+	void SetMpos(const TPoint& pos);
 	void Zoom(const TPoint& pos, int wheeldelta);
 	void Move(const TPoint& pos);
 	void ByKey(WORD &Key);
 	void SelectCell(const TPoint& pos);
+	float getScale() { return scale; }
 };
 //---------------------------------------------------------------------------
 #endif
