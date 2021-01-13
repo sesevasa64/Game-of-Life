@@ -3,9 +3,9 @@
 #ifndef colonyH
 #define colonyH
 
-#include<hash_map>
-#include"vec.h"
-#include"cell.h"
+#include <hash_map>
+#include "vec.h"
+#include "cell.h"
 
 typedef std::hash_map<vec2i, Cell*, HashPoint>::iterator cell_it;
 typedef std::hash_map<vec2i, Cell*, HashPoint>::const_iterator const_cell_it;
@@ -14,7 +14,6 @@ class Colony {
 public:
 	Colony() {}
 	void tick();
-	void draw();
 	void create(vec2i pos, TColor color);
 	void remove(vec2i pos);
 	void remove(cell_it it);

@@ -2,15 +2,18 @@
 
 #ifndef gridH
 #define gridH
+#include <Forms.hpp>
 #include <Controls.hpp>
+#include "colony.h"
 #include "vec.h"
 
 class Grid {
 public:
-	Grid(TCanvas *canvas) : Canvas(canvas), p(1) {}
+	Grid(TForm *form);
 	void updateBorders(vec2i c1, vec2i c2);
 	void updateSize(float scale);
-	void draw();
+	void drawGrid();
+	void drawColony(Colony& colony);
 private:
 	TCanvas *Canvas;
 	float size, p;

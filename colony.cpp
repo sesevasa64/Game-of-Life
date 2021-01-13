@@ -82,11 +82,5 @@ const_cell_it Colony::end() {
 	return cells.end();
 }
 
-void Colony::draw() {
-	for (cell_it it = cells.begin(); it != cells.end(); it++) {
-		it->second->draw();
-	}
-}
-
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

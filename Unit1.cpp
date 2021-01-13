@@ -14,7 +14,7 @@
 TForm1 *Form1;
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
-	: TForm(Owner), grid(Form1->Canvas)
+	: TForm(Owner), grid(Form1)
 {
 }
 //---------------------------------------------------------------------------
@@ -99,8 +99,8 @@ void __fastcall TForm1::FormPaint(TObject *Sender)
 {
 	Camera& cam = Camera::get();
 	grid.updateSize(cam.getScale());
-	grid.draw();
-	colony.draw();
+	grid.drawGrid();
+	grid.drawColony(colony);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::N3Click(TObject *Sender)

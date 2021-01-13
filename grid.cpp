@@ -4,6 +4,11 @@
 #include "grid.h"
 #include "camera.h"
 
+Grid::Grid(TForm *form) : Canvas(form->Canvas), p(1) {
+	vec2i c1(0, 0), c2(form->ClientWidth, form->ClientHeight);
+	updateBorders(c1, c2);
+}
+
 void Grid::updateBorders(vec2i c1, vec2i c2) {
 	Camera &cam = Camera::get();
 	w1 = cam.toWorld(c1);
@@ -25,7 +30,7 @@ void Grid::updateSize(float scale) {
     }
 }
 
-void Grid::draw() {
+void Grid::drawGrid() {
 	float size = p * 40.;
 	if (size != 0) {
     	Camera& cam = Camera::get();
@@ -47,6 +52,12 @@ void Grid::draw() {
 			Canvas->MoveTo(c1.x, c1.y);
 			Canvas->LineTo(c2.x, c2.y);
 		}
+	}
+}
+
+void Grid::drawColony(Colony& colony) {
+	for (const_cell_it it = colony.begin(); it != colony.end(); it++) {
+		it->second->draw();
 	}
 }
 
