@@ -27,32 +27,18 @@ void Camera::SetMousePosition(const TPoint& pos) {
 	lastMousePosition = vec2f(pos.x, pos.y);
 }
 
-void Camera::ByKey(WORD &Key) {
+void Camera::MoveByKey(WORD &Key) {
 	if (Key == VK_UP) {
-		offset.y -= 10;
+		offset.y -= 10 / scale;
 	}
 	else if (Key == VK_DOWN) {
-		offset.y += 10;
+		offset.y += 10 / scale;
 	}
 	else if (Key == VK_LEFT) {
-		offset.x -= 10;
+		offset.x -= 10 / scale;
 	}
 	else if (Key == VK_RIGHT) {
-		offset.x += 10;
-	}
-}
-
-void Camera::SelectCell(const TPoint& mpos) {
-	vec2f cam(mpos.x, mpos.y);
-	vec2i pos = toWorld(cam);
-	pos.x = pos.x / 40.;
-	pos.y = pos.y / 40.;
-	Colony& colony = Form1->getColony();
-	if (colony.isExist(pos)) {
-    	colony.remove(pos);
-	}
-	else {
-		colony.create(pos, clRed);
+		offset.x += 10 / scale;
 	}
 }
 

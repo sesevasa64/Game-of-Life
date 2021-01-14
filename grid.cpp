@@ -4,7 +4,7 @@
 #include "grid.h"
 #include "camera.h"
 
-Grid::Grid(TForm *form) : Canvas(form->Canvas), p(1) {
+Grid::Grid(TForm *form) : Canvas(form->Canvas), p(1), cell_color(clRed) {
 	vec2i c1(0, 0), c2(form->ClientWidth, form->ClientHeight);
 	updateBorders(c1, c2);
 }
@@ -67,9 +67,13 @@ void Grid::drawCell(Cell *cell) {
 	vec2i c2 = cell->p2 * cell_size;
 	vec2i a = cam.toCamera(c1);
 	vec2i b = cam.toCamera(c2);
-	Canvas->Brush->Color = cell->color;
+	Canvas->Brush->Color = cell_color;
 	TRect r(a.x, a.y, b.x, b.y);
 	Canvas->FillRect(r);
+}
+
+void Grid::setColor(TColor color) {
+    cell_color = color;
 }
 
 //---------------------------------------------------------------------------

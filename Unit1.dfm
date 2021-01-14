@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Game of Life'
-  ClientHeight = 556
+  ClientHeight = 596
   ClientWidth = 771
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -113,11 +113,27 @@ object Form1: TForm1
       end
       object N5: TMenuItem
         Caption = #1057#1090#1077#1088#1077#1090#1100' '#1074#1089#1077
+        OnClick = N5Click
       end
       object N6: TMenuItem
         Caption = #1055#1072#1091#1079#1072
         OnClick = N6Click
       end
+    end
+    object N7: TMenuItem
+      Caption = #1057#1082#1086#1088#1086#1089#1090#1100
+      object N8: TMenuItem
+        Caption = #1059#1074#1077#1083#1080#1095#1080#1090#1100
+        OnClick = N8Click
+      end
+      object N9: TMenuItem
+        Caption = #1059#1084#1077#1085#1100#1096#1080#1090#1100
+        OnClick = N9Click
+      end
+    end
+    object N10: TMenuItem
+      Caption = #1062#1074#1077#1090' '#1082#1083#1077#1090#1082#1080
+      OnClick = N10Click
     end
     object N2: TMenuItem
       Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
@@ -142,5 +158,9 @@ object Form1: TForm1
   object SaveDialog1: TSaveDialog
     Left = 736
     Top = 368
+  end
+  object ColorDialog1: TColorDialog
+    Left = 736
+    Top = 528
   end
 end

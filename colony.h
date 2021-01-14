@@ -13,6 +13,7 @@ typedef std::hash_map<vec2i, Cell*, HashPoint>::const_iterator const_cell_it;
 class Colony {
 public:
 	Colony() {}
+	~Colony();
 	void tick();
 	void create(vec2i pos, TColor color);
 	void remove(vec2i pos);

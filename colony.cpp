@@ -82,5 +82,11 @@ const_cell_it Colony::end() {
 	return cells.end();
 }
 
+Colony::~Colony() {
+    for (cell_it it = cells.begin(); it != cells.end(); it++) {
+        delete it->second;
+    }
+}
+
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

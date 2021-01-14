@@ -35,7 +35,10 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 	}
 	// Стрелочки
 	else {
-		Camera::get().ByKey(Key);
+		Camera &cam = Camera::get();
+		cam.MoveByKey(Key);
+		vec2i c1(0, 0), c2(ClientWidth, ClientHeight);
+		grid.updateBorders(c1, c2);
 	}
 }
 //---------------------------------------------------------------------------
@@ -48,8 +51,17 @@ void __fastcall TForm1::FormMouseDown(TObject *Sender, TMouseButton Button,
     	::ScreenToClient(Form1->Handle, &mpos);
 		cam.SetMousePosition(mpos);
 	}
-	else {
-		cam.SelectCell(mpos);
+	else if (Shift.Contains(ssRight)) {
+		vec2f c(mpos.x, mpos.y);
+		vec2i pos = cam.toWorld(c);
+		pos.x = floor(pos.x / double(grid.cell_size));
+		pos.y = floor(pos.y / double(grid.cell_size));
+		if (colony.isExist(pos)) {
+			colony.remove(pos);
+		}
+		else {
+			colony.create(pos, clRed);
+		}
 	}
 }
 //---------------------------------------------------------------------------
@@ -64,7 +76,6 @@ void __fastcall TForm1::FormMouseMove(TObject *Sender, TShiftState Shift, int X,
 		cam.SetMousePosition(mpos);
 	}
 	vec2i c1(0, 0), c2(ClientWidth, ClientHeight);
-	vec2i w1 = cam.toWorld(c1), w2 = cam.toWorld(c2);
 	grid.updateBorders(c1, c2);
 }
 //---------------------------------------------------------------------------
@@ -75,7 +86,6 @@ void __fastcall TForm1::FormMouseWheel(TObject *Sender, TShiftState Shift,
 	Camera& cam = Camera::get();
 	cam.Zoom(MousePos, WheelDelta);
 	vec2i c1(0, 0), c2(ClientWidth, ClientHeight);
-	vec2i w1 = cam.toWorld(c1), w2 = cam.toWorld(c2);
 	grid.updateBorders(c1, c2);
 	Handled = true;
 }
@@ -127,6 +137,33 @@ void __fastcall TForm1::N4Click(TObject *Sender)
 void __fastcall TForm1::N6Click(TObject *Sender)
 {
 	Timer2->Enabled = !Timer2->Enabled;	
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::N5Click(TObject *Sender)
+{
+	// Утечка памяти
+	colony = Colony();	
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::N8Click(TObject *Sender)
+{
+	Timer2->Interval -= 250u;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::N9Click(TObject *Sender)
+{
+	Timer2->Interval += 250u;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::N10Click(TObject *Sender)
+{
+	if (ColorDialog1->Execute()) {
+		grid.setColor(ColorDialog1->Color);
+	}
 }
 //---------------------------------------------------------------------------
 

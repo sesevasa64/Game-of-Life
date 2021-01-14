@@ -34,6 +34,11 @@ __published:	// IDE-managed Components
 	TLabel *Label5;
 	TLabel *Label6;
 	TMenuItem *N6;
+	TMenuItem *N7;
+	TMenuItem *N8;
+	TMenuItem *N9;
+	TMenuItem *N10;
+	TColorDialog *ColorDialog1;
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall FormMouseDown(TObject *Sender, TMouseButton Button,
           TShiftState Shift, int X, int Y);
@@ -48,6 +53,10 @@ __published:	// IDE-managed Components
 	void __fastcall N3Click(TObject *Sender);
 	void __fastcall N4Click(TObject *Sender);
 	void __fastcall N6Click(TObject *Sender);
+	void __fastcall N5Click(TObject *Sender);
+	void __fastcall N8Click(TObject *Sender);
+	void __fastcall N9Click(TObject *Sender);
+	void __fastcall N10Click(TObject *Sender);
 private:	// User declarations
 	Colony colony;
 	Grid grid;

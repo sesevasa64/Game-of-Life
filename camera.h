@@ -30,8 +30,7 @@ public:
 	void SetMousePosition(const TPoint& pos);
 	void Zoom(const TPoint& pos, int wheeldelta);
 	void Move(const TPoint& pos);
-	void ByKey(WORD &Key);
-	void SelectCell(const TPoint& pos);
+	void MoveByKey(WORD &Key);
 	float getScale() { return scale; }
 };
 
