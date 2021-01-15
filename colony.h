@@ -15,7 +15,7 @@ public:
 	Colony() {}
 	~Colony();
 	void tick();
-	void create(vec2i pos, TColor color);
+	void create(vec2i pos);
 	void remove(vec2i pos);
 	void remove(cell_it it);
 	bool isExist(vec2i pos);

@@ -4,12 +4,12 @@
 #define gridH
 #include <Forms.hpp>
 #include "colony.h"
-#include "vec.h"
+#include "camera.h"
 
 class Grid {
 public:
-	Grid(TForm *form);
-	void updateBorders(vec2i c1, vec2i c2);
+	Grid(TForm *form, Camera *cam);
+	void updateBorders();
 	void updateSize(float scale);
 	void setColor(TColor color);
 	void drawGrid();
@@ -17,8 +17,9 @@ public:
 	void drawColony(Colony& colony);
 	static const int cell_size = 40;
 private:
-	TColor cell_color;
 	TCanvas *Canvas;
+	TForm *Form;
+	Camera *cam;
 	vec2i w1, w2;
 	int p;
 };

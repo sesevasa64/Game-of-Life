@@ -3,6 +3,7 @@
 #pragma hdrstop
 #include "math.h"
 #include "camera.h"
+#include "Unit1.h"
 
 void Camera::Move(const TPoint& pos) {
 	vec2i mpos(pos.x, pos.y);
@@ -29,16 +30,16 @@ void Camera::SetMousePosition(const TPoint& pos) {
 
 void Camera::MoveByKey(WORD &Key) {
 	if (Key == VK_UP) {
-		offset.y -= 10 / scale;
+		offset.y -= keyStep / scale;
 	}
 	else if (Key == VK_DOWN) {
-		offset.y += 10 / scale;
+		offset.y += keyStep / scale;
 	}
 	else if (Key == VK_LEFT) {
-		offset.x -= 10 / scale;
+		offset.x -= keyStep / scale;
 	}
 	else if (Key == VK_RIGHT) {
-		offset.x += 10 / scale;
+		offset.x += keyStep / scale;
 	}
 }
 

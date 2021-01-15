@@ -10,7 +10,7 @@ Colony Manager::load_colony(AnsiString& file_name) {
 	Colony colony;
 	ifstream file(file_name.c_str());
 	while (file >> p.x >> p.y) {
-		colony.create(p, clRed);
+		colony.create(p);
 	}
 	return colony;
 }

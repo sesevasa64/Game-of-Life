@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Game of Life'
-  ClientHeight = 596
-  ClientWidth = 771
+  ClientHeight = 603
+  ClientWidth = 762
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,6 +18,7 @@ object Form1: TForm1
   OnMouseMove = FormMouseMove
   OnMouseWheel = FormMouseWheel
   OnPaint = FormPaint
+  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -98,8 +99,34 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
   end
+  object Label7: TLabel
+    Left = 8
+    Top = 77
+    Width = 74
+    Height = 19
+    Caption = #1057#1082#1086#1088#1086#1089#1090#1100':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label8: TLabel
+    Left = 88
+    Top = 77
+    Width = 36
+    Height = 19
+    Caption = '1500'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object MainMenu1: TMainMenu
-    Left = 736
+    Left = 728
     Top = 496
     object N1: TMenuItem
       Caption = #1048#1075#1088#1072
@@ -116,7 +143,7 @@ object Form1: TForm1
         OnClick = N5Click
       end
       object N6: TMenuItem
-        Caption = #1055#1072#1091#1079#1072
+        Caption = #1055#1072#1091#1079#1072' / '#1042#1086#1079#1086#1073#1085#1086#1074#1080#1090#1100
         OnClick = N6Click
       end
     end
@@ -135,32 +162,40 @@ object Form1: TForm1
       Caption = #1062#1074#1077#1090' '#1082#1083#1077#1090#1082#1080
       OnClick = N10Click
     end
-    object N2: TMenuItem
-      Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+    object N11: TMenuItem
+      Caption = #1057#1087#1088#1072#1074#1082#1072
+      object N2: TMenuItem
+        Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+        OnClick = N2Click
+      end
+      object N12: TMenuItem
+        Caption = #1055#1086#1084#1086#1097#1100
+        OnClick = N12Click
+      end
     end
   end
   object Timer1: TTimer
     Interval = 14
     OnTimer = Timer1Timer
-    Left = 736
+    Left = 728
     Top = 464
   end
   object Timer2: TTimer
     Interval = 1500
     OnTimer = Timer2Timer
-    Left = 736
+    Left = 728
     Top = 432
   end
   object OpenDialog1: TOpenDialog
-    Left = 736
+    Left = 728
     Top = 400
   end
   object SaveDialog1: TSaveDialog
-    Left = 736
+    Left = 728
     Top = 368
   end
   object ColorDialog1: TColorDialog
-    Left = 736
+    Left = 728
     Top = 528
   end
 end

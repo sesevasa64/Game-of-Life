@@ -6,9 +6,8 @@
 #include <Graphics.hpp>
 
 struct Cell {
-	Cell(vec2i p, TColor color);
+	Cell(vec2i p);
 	vec2i p1, p2;
-	TColor color;
 };
 
 //---------------------------------------------------------------------------

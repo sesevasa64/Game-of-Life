@@ -2,23 +2,11 @@
 
 #ifndef cameraH
 #define cameraH
-#include"Unit1.h"
 #include"vec.h"
 
 class Camera {
-private:
-	Camera() : scale(1.0f) {}
-    Camera(const Camera&);  
-	Camera& operator=(Camera&);
-	vec2f beforeZoom, afterZoom;
-	vec2f offset;
-	vec2f lastMousePosition;
-	float scale;
 public:
-	static Camera& get() {
-		static Camera camera;
-		return camera;
-	}
+	Camera() : scale(1.0f) {}
 	template<class T>
 	vec2<T> Camera::toWorld(vec2<T>& cam) {
 		return cam / scale + offset;
@@ -32,6 +20,14 @@ public:
 	void Move(const TPoint& pos);
 	void MoveByKey(WORD &Key);
 	float getScale() { return scale; }
+private:
+	Camera(const Camera&);
+	Camera& operator=(Camera&);
+	vec2f beforeZoom, afterZoom;
+	vec2f offset;
+	vec2f lastMousePosition;
+	float scale;
+	static const int keyStep = 10;
 };
 
 //---------------------------------------------------------------------------

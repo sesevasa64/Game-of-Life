@@ -11,34 +11,28 @@ public:
 	vec2<T>(T x, T y) : x(x), y(y) {}
 	template<typename U>
 	vec2<T>(const vec2<U>& v) : x(v.x), y(v.y) {}
-	// Хорошо
 	vec2<T> operator+(const vec2<T>& v) {
         return vec2<T>(x + v.x, y + v.y);
 	}
-	// Хорошо
 	vec2<T> operator-(const vec2<T>& v) {
 		return vec2<T>(x - v.x, y - v.y);
 	}
-	// Сойдет
 	template<typename U>
 	vec2<T>& operator+=(const vec2<U>& v) {
 		x += v.x;
 		y += v.y;
 		return *this;
 	}
-	// Сойдет
 	template<typename U>
 	vec2<T>& operator-=(const vec2<U>& v) {
 		x -= v.x;
 		y -= v.y;
 		return *this;
 	}
-	// Сомнительно
 	template<typename U>
 	vec2<U> operator*(U scalar) {
 		return vec2<U>(x * scalar, y * scalar);
 	}
-	// Сомнительно
 	template<typename U>
 	vec2<U> operator/(U scalar) {
 		return vec2<U>(x / scalar, y / scalar);

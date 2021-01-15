@@ -40,15 +40,15 @@ void Colony::tick() {
 		remove(*it);
 	}
 	for (create_it it = to_create.begin(); it != to_create.end(); it++) {
-    	create(*it, clRed);
+    	create(*it);
 	}
 }
 
-void Colony::create(vec2i pos, TColor color) {
+void Colony::create(vec2i pos) {
 	for (int i = 0; i < 8; i++) {
 		neighbors[pos + dv[i]]++;
 	}
-	cells[pos] = new Cell(pos, color);
+	cells[pos] = new Cell(pos);
 }
 
 void Colony::remove(vec2i pos) {
