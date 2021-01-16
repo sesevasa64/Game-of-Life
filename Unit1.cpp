@@ -29,7 +29,9 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 	}
 	// Êíîïêà +
 	else if (Key == VK_OEM_PLUS) {
-		Timer2->Interval -= 250u;
+		if (Timer2->Interval > 250) {
+			Timer2->Interval -= 250u;
+		}
 		Label8->Caption = Timer2->Interval;
 	}
 	// Êíîïêà -
@@ -53,7 +55,7 @@ void __fastcall TForm1::FormMouseDown(TObject *Sender, TMouseButton Button,
 		cam.SetMousePosition(mpos);
 	}
 	else if (Shift.Contains(ssRight)) {
-		vec2f c(mpos.x, mpos.y);
+		vec2d c(mpos.x, mpos.y);
 		vec2i pos = cam.toWorld(c);
 		pos.x = floor(pos.x / double(grid.cell_size));
 		pos.y = floor(pos.y / double(grid.cell_size));
@@ -145,13 +147,17 @@ void __fastcall TForm1::N5Click(TObject *Sender)
 
 void __fastcall TForm1::N8Click(TObject *Sender)
 {
-	Timer2->Interval -= 250u;
+	if (Timer2->Interval > 250) {
+    	Timer2->Interval -= 250u;
+	}
+	Label8->Caption = Timer2->Interval;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::N9Click(TObject *Sender)
 {
 	Timer2->Interval += 250u;
+	Label8->Caption = Timer2->Interval;
 }
 //---------------------------------------------------------------------------
 
@@ -187,4 +193,5 @@ void __fastcall TForm1::N12Click(TObject *Sender)
 	Timer2->Enabled = true;
 }
 //---------------------------------------------------------------------------
+
 

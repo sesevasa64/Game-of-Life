@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Game of Life'
-  ClientHeight = 603
-  ClientWidth = 762
+  ClientHeight = 564
+  ClientWidth = 764
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -76,9 +76,9 @@ object Form1: TForm1
   object Label5: TLabel
     Left = 8
     Top = 2
-    Width = 33
+    Width = 70
     Height = 19
-    Caption = #1047#1091#1084':'
+    Caption = #1052#1072#1089#1096#1090#1072#1073':'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -87,7 +87,7 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label6: TLabel
-    Left = 47
+    Left = 84
     Top = 2
     Width = 9
     Height = 19
@@ -129,7 +129,11 @@ object Form1: TForm1
     Left = 728
     Top = 496
     object N1: TMenuItem
-      Caption = #1048#1075#1088#1072
+      Caption = #1050#1086#1083#1086#1085#1080#1103
+      object N6: TMenuItem
+        Caption = #1055#1072#1091#1079#1072' / '#1042#1086#1079#1086#1073#1085#1086#1074#1080#1090#1100
+        OnClick = N6Click
+      end
       object N3: TMenuItem
         Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1080#1079' '#1092#1072#1081#1083#1072
         OnClick = N3Click
@@ -142,25 +146,21 @@ object Form1: TForm1
         Caption = #1057#1090#1077#1088#1077#1090#1100' '#1074#1089#1077
         OnClick = N5Click
       end
-      object N6: TMenuItem
-        Caption = #1055#1072#1091#1079#1072' / '#1042#1086#1079#1086#1073#1085#1086#1074#1080#1090#1100
-        OnClick = N6Click
+      object N10: TMenuItem
+        Caption = #1062#1074#1077#1090' '#1082#1083#1077#1090#1082#1080
+        OnClick = N10Click
       end
     end
     object N7: TMenuItem
       Caption = #1057#1082#1086#1088#1086#1089#1090#1100
       object N8: TMenuItem
-        Caption = #1059#1074#1077#1083#1080#1095#1080#1090#1100
+        Caption = #1059#1074#1077#1083#1080#1095#1080#1090#1100' '#1089#1082#1086#1088#1086#1089#1090#1100
         OnClick = N8Click
       end
       object N9: TMenuItem
-        Caption = #1059#1084#1077#1085#1100#1096#1080#1090#1100
+        Caption = #1059#1084#1077#1085#1100#1096#1080#1090#1100' '#1089#1082#1086#1088#1086#1089#1090#1100
         OnClick = N9Click
       end
-    end
-    object N10: TMenuItem
-      Caption = #1062#1074#1077#1090' '#1082#1083#1077#1090#1082#1080
-      OnClick = N10Click
     end
     object N11: TMenuItem
       Caption = #1057#1087#1088#1072#1074#1082#1072

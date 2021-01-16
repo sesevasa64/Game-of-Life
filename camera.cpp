@@ -11,21 +11,23 @@ void Camera::Move(const TPoint& pos) {
 }
 
 void Camera::Zoom(const TPoint& pos, int wheeldelta) {
-	vec2f mpos(pos.x, pos.y);
+	vec2d mpos(pos.x, pos.y);
 	beforeZoom = toWorld(mpos);
 	if (wheeldelta > 0) {
-		scale *= 1.01f;
+		if (scale < 4.5) {
+        	scale *= 1.01;
+		}
 	}
 	else {
-		scale *= 0.99f;
+		scale *= 0.99;
 	}
 	afterZoom = toWorld(mpos);
 	offset += (beforeZoom - afterZoom);
-	Form1->Label6->Caption = FloatToStr(scale);
+	Form1->Label6->Caption = FloatToStrF(scale, ffFixed, 3, 2);
 }
 
 void Camera::SetMousePosition(const TPoint& pos) {
-	lastMousePosition = vec2f(pos.x, pos.y);
+	lastMousePosition = vec2d(pos.x, pos.y);
 }
 
 void Camera::MoveByKey(WORD &Key) {

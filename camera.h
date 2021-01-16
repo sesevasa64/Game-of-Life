@@ -6,7 +6,7 @@
 
 class Camera {
 public:
-	Camera() : scale(1.0f) {}
+	Camera() : scale(1.0) {}
 	template<class T>
 	vec2<T> Camera::toWorld(vec2<T>& cam) {
 		return cam / scale + offset;
@@ -23,10 +23,10 @@ public:
 private:
 	Camera(const Camera&);
 	Camera& operator=(Camera&);
-	vec2f beforeZoom, afterZoom;
-	vec2f offset;
-	vec2f lastMousePosition;
-	float scale;
+	vec2d beforeZoom, afterZoom;
+	vec2d offset;
+	vec2d lastMousePosition;
+	double scale;
 	static const int keyStep = 10;
 };
 
