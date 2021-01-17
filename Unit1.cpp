@@ -16,8 +16,18 @@
 TForm1 *Form1;
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
-	: TForm(Owner), grid(Form1, &cam)
+	: TForm(Owner), grid(Form1, PaintBox1, &cam)
 {
+}
+//---------------------------------------------------------------------------
+void TForm1::SwapTime() {
+	Timer2->Enabled = !Timer2->Enabled;
+	if(Timer2->Enabled) {
+		Label10->Caption = "Идет симуляция";
+	}
+	else {
+		Label10->Caption = "На паузе";
+	}
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
@@ -25,7 +35,7 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 {
 	// Если нажата кнопка P
 	if (Key == 0x50) {
-		Timer2->Enabled = !Timer2->Enabled;
+		SwapTime();
 	}
 	// Кнопка +
 	else if (Key == VK_OEM_PLUS) {
@@ -46,40 +56,6 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 	}
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::FormMouseDown(TObject *Sender, TMouseButton Button,
-	  TShiftState Shift, int X, int Y)
-{
-	TPoint mpos(X, Y);
-	if (Shift.Contains(ssLeft)) {
-    	::ScreenToClient(Form1->Handle, &mpos);
-		cam.SetMousePosition(mpos);
-	}
-	else if (Shift.Contains(ssRight)) {
-		vec2d c(mpos.x, mpos.y);
-		vec2i pos = cam.toWorld(c);
-		pos.x = floor(pos.x / double(grid.cell_size));
-		pos.y = floor(pos.y / double(grid.cell_size));
-		if (colony.isExist(pos)) {
-			colony.remove(pos);
-		}
-		else {
-			colony.create(pos);
-		}
-	}
-}
-//---------------------------------------------------------------------------
-void __fastcall TForm1::FormMouseMove(TObject *Sender, TShiftState Shift, int X,
-	  int Y)
-{
-	TPoint mpos(X, Y);
-	::ScreenToClient(Form1->Handle, &mpos);
-	if (Shift.Contains(ssLeft)) {
-		cam.Move(mpos);
-		cam.SetMousePosition(mpos);
-	}
-	grid.updateBorders();
-}
-//---------------------------------------------------------------------------
 void __fastcall TForm1::FormMouseWheel(TObject *Sender, TShiftState Shift,
 	  int WheelDelta, TPoint &MousePos, bool &Handled)
 {
@@ -96,7 +72,8 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer1Timer(TObject *Sender)
 {
-	Form1->Repaint();
+	//Form1->Repaint();
+	PaintBox1->Repaint();
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer2Timer(TObject *Sender)
@@ -105,13 +82,6 @@ void __fastcall TForm1::Timer2Timer(TObject *Sender)
 	colony.tick();
 	Label4->Caption = IntToStr(colony.size());
 	Label1->Caption = IntToStr(++i);
-}
-//---------------------------------------------------------------------------
-void __fastcall TForm1::FormPaint(TObject *Sender)
-{
-	grid.updateSize(cam.getScale());
-	grid.drawGrid();
-	grid.drawColony(colony);
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::N3Click(TObject *Sender)
@@ -134,7 +104,13 @@ void __fastcall TForm1::N4Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::N6Click(TObject *Sender)
 {
-	Timer2->Enabled = !Timer2->Enabled;	
+	SwapTime();
+	if(Timer2->Enabled) {
+		N6->Caption = "Пауза";
+	}
+	else {
+		N6->Caption = "Возобновить";
+	}
 }
 //---------------------------------------------------------------------------
 
@@ -179,7 +155,6 @@ void __fastcall TForm1::N2Click(TObject *Sender)
 	Timer2->Enabled = true;
 }
 //---------------------------------------------------------------------------
-
 void __fastcall TForm1::FormResize(TObject *Sender)
 {
 	grid.updateBorders();
@@ -193,5 +168,45 @@ void __fastcall TForm1::N12Click(TObject *Sender)
 	Timer2->Enabled = true;
 }
 //---------------------------------------------------------------------------
-
+void __fastcall TForm1::PaintBox1Paint(TObject *Sender)
+{
+	grid.updateSize(cam.getScale());
+	grid.drawGrid();
+	grid.drawColony(colony);
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::PaintBox1MouseDown(TObject *Sender, TMouseButton Button,
+      TShiftState Shift, int X, int Y)
+{
+	TPoint mpos(X, Y);
+	if (Shift.Contains(ssLeft)) {
+		::ScreenToClient(Form1->Handle, &mpos);
+		cam.SetMousePosition(mpos);
+	}
+	else if (Shift.Contains(ssRight)) {
+		vec2d c(mpos.x, mpos.y);
+		vec2i pos = cam.toWorld(c);
+		pos.x = floor(pos.x / double(grid.cell_size));
+		pos.y = floor(pos.y / double(grid.cell_size));
+		if (colony.isExist(pos)) {
+			colony.remove(pos);
+		}
+		else {
+			colony.create(pos);
+		}
+	}
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::PaintBox1MouseMove(TObject *Sender, TShiftState Shift,
+      int X, int Y)
+{
+	TPoint mpos(X, Y);
+	::ScreenToClient(Form1->Handle, &mpos);
+	if (Shift.Contains(ssLeft)) {
+		cam.Move(mpos);
+		cam.SetMousePosition(mpos);
+	}
+	grid.updateBorders();
+}
+//---------------------------------------------------------------------------
 

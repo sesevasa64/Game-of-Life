@@ -3,9 +3,10 @@
 #include "math.h"
 #include "grid.h"
 
-Grid::Grid(TForm *form, Camera* cam)
-: Form(form), Canvas(form->Canvas), cam(cam), p(1) {
+Grid::Grid(TForm *form, TPaintBox *paintBox, Camera* cam)
+: Form(form), PaintBox(paintBox), Canvas(paintBox->Canvas), cam(cam), p(1) {
 	Canvas->Brush->Color = clRed;
+	paintBox->Color = clRed;
 	updateBorders();
 }
 
@@ -70,7 +71,7 @@ void Grid::drawCell(Cell *cell) {
 }
 
 void Grid::setColor(TColor color) {
-	Canvas->Brush->Color = color;
+	PaintBox->Color = color;
 }
 
 //---------------------------------------------------------------------------

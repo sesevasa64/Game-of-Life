@@ -1,9 +1,10 @@
 object Form1: TForm1
   Left = 0
   Top = 0
+  Anchors = []
   Caption = 'Game of Life'
-  ClientHeight = 564
-  ClientWidth = 764
+  ClientHeight = 583
+  ClientWidth = 762
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,16 +15,13 @@ object Form1: TForm1
   OldCreateOrder = False
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
-  OnMouseDown = FormMouseDown
-  OnMouseMove = FormMouseMove
   OnMouseWheel = FormMouseWheel
-  OnPaint = FormPaint
   OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 100
-    Top = 27
+    Left = 487
+    Top = 2
     Width = 9
     Height = 19
     Caption = '0'
@@ -35,8 +33,8 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label2: TLabel
-    Left = 8
-    Top = 27
+    Left = 395
+    Top = 2
     Width = 86
     Height = 19
     Caption = #1055#1086#1082#1086#1083#1077#1085#1080#1077':'
@@ -48,8 +46,8 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 8
-    Top = 52
+    Left = 528
+    Top = 2
     Width = 58
     Height = 19
     Caption = #1050#1083#1077#1090#1086#1082':'
@@ -61,8 +59,8 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 72
-    Top = 52
+    Left = 592
+    Top = 2
     Width = 9
     Height = 19
     Caption = '0'
@@ -74,7 +72,7 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label5: TLabel
-    Left = 8
+    Left = 280
     Top = 2
     Width = 70
     Height = 19
@@ -87,7 +85,7 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label6: TLabel
-    Left = 84
+    Left = 356
     Top = 2
     Width = 9
     Height = 19
@@ -100,8 +98,8 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label7: TLabel
-    Left = 8
-    Top = 77
+    Left = 638
+    Top = 2
     Width = 74
     Height = 19
     Caption = #1057#1082#1086#1088#1086#1089#1090#1100':'
@@ -113,11 +111,57 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label8: TLabel
-    Left = 88
-    Top = 77
+    Left = 718
+    Top = 2
     Width = 36
     Height = 19
     Caption = '1500'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object PaintBox1: TPaintBox
+    AlignWithMargins = True
+    Left = 1
+    Top = 24
+    Width = 760
+    Height = 558
+    Margins.Left = 1
+    Margins.Top = 24
+    Margins.Right = 1
+    Margins.Bottom = 1
+    Align = alClient
+    Anchors = [akLeft, akRight, akBottom]
+    OnMouseDown = PaintBox1MouseDown
+    OnMouseMove = PaintBox1MouseMove
+    OnPaint = PaintBox1Paint
+    ExplicitLeft = 0
+    ExplicitTop = 40
+    ExplicitWidth = 762
+    ExplicitHeight = 523
+  end
+  object Label9: TLabel
+    Left = 8
+    Top = 2
+    Width = 83
+    Height = 19
+    Caption = #1057#1086#1089#1090#1086#1103#1085#1080#1077':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label10: TLabel
+    Left = 97
+    Top = 2
+    Width = 118
+    Height = 19
+    Caption = #1048#1076#1077#1090' '#1089#1080#1084#1091#1083#1103#1094#1080#1103
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -131,7 +175,7 @@ object Form1: TForm1
     object N1: TMenuItem
       Caption = #1050#1086#1083#1086#1085#1080#1103
       object N6: TMenuItem
-        Caption = #1055#1072#1091#1079#1072' / '#1042#1086#1079#1086#1073#1085#1086#1074#1080#1090#1100
+        Caption = #1055#1072#1091#1079#1072
         OnClick = N6Click
       end
       object N3: TMenuItem

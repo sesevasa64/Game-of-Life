@@ -43,17 +43,15 @@ __published:	// IDE-managed Components
 	TMenuItem *N12;
 	TLabel *Label7;
 	TLabel *Label8;
+	TPaintBox *PaintBox1;
+	TLabel *Label9;
+	TLabel *Label10;
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
-	void __fastcall FormMouseDown(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y);
-	void __fastcall FormMouseMove(TObject *Sender, TShiftState Shift, int X,
-          int Y);
 	void __fastcall FormMouseWheel(TObject *Sender, TShiftState Shift,
           int WheelDelta, TPoint &MousePos, bool &Handled);
 	void __fastcall Timer1Timer(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall Timer2Timer(TObject *Sender);
-	void __fastcall FormPaint(TObject *Sender);
 	void __fastcall N3Click(TObject *Sender);
 	void __fastcall N4Click(TObject *Sender);
 	void __fastcall N6Click(TObject *Sender);
@@ -64,10 +62,16 @@ __published:	// IDE-managed Components
 	void __fastcall N2Click(TObject *Sender);
 	void __fastcall FormResize(TObject *Sender);
 	void __fastcall N12Click(TObject *Sender);
+	void __fastcall PaintBox1Paint(TObject *Sender);
+	void __fastcall PaintBox1MouseDown(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y);
+	void __fastcall PaintBox1MouseMove(TObject *Sender, TShiftState Shift, int X,
+          int Y);
 private:	// User declarations
 	Colony colony;
 	Camera cam;
 	Grid grid;
+	void SwapTime();
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
 };
