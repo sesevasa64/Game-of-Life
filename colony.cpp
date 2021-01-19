@@ -83,9 +83,18 @@ const_cell_it Colony::end() {
 }
 
 Colony::~Colony() {
-    for (cell_it it = cells.begin(); it != cells.end(); it++) {
-        delete it->second;
-    }
+	for (cell_it it = cells.begin(); it != cells.end(); it++) {
+		delete it->second;
+	}
+}
+
+Colony& Colony::operator=(const Colony other) {
+	for (cell_it it = cells.begin(); it != cells.end(); it++) {
+		delete it->second;
+	}
+	cells = other.cells;
+	neighbors = other.neighbors;
+	return *this;
 }
 
 //---------------------------------------------------------------------------

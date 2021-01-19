@@ -22,6 +22,7 @@ public:
 	const_cell_it begin();
 	const_cell_it end();
 	size_t size();
+	Colony& operator=(const Colony other);
 private:
 	std::hash_map<vec2i, Cell*, HashPoint> cells;
 	std::hash_map<vec2i, int, HashPoint> neighbors;

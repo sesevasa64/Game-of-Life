@@ -14,10 +14,12 @@ object Form3: TForm3
   PixelsPerInch = 96
   TextHeight = 13
   object Memo1: TMemo
-    Left = 16
-    Top = 16
-    Width = 449
-    Height = 329
+    AlignWithMargins = True
+    Left = 3
+    Top = 3
+    Width = 475
+    Height = 355
+    Align = alClient
     Color = clMenu
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -53,5 +55,9 @@ object Form3: TForm3
     ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 0
+    ExplicitLeft = 0
+    ExplicitTop = 0
+    ExplicitWidth = 471
+    ExplicitHeight = 351
   end
 end

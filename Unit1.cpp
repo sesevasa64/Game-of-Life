@@ -14,6 +14,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm1 *Form1;
+bool tmp;
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
 	: TForm(Owner), grid(Form1, PaintBox1, &cam)
@@ -24,9 +25,11 @@ void TForm1::SwapTime() {
 	Timer2->Enabled = !Timer2->Enabled;
 	if(Timer2->Enabled) {
 		Label10->Caption = "Идет симуляция";
+		N6->Caption = "Пауза";
 	}
 	else {
 		Label10->Caption = "На паузе";
+		N6->Caption = "Возобновить";
 	}
 }
 //---------------------------------------------------------------------------
@@ -86,20 +89,22 @@ void __fastcall TForm1::Timer2Timer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::N3Click(TObject *Sender)
 {
+	tmp = Timer2->Enabled;
 	Timer2->Enabled = false;
 	OpenDialog1->Execute();
 	AnsiString str = OpenDialog1->FileName;
 	colony = Manager::load_colony(str);
-	Timer2->Enabled = true;	
+	Timer2->Enabled = tmp;	
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::N4Click(TObject *Sender)
 {
+	tmp = Timer2->Enabled;
 	Timer2->Enabled = false;
 	SaveDialog1->Execute();
 	AnsiString str = SaveDialog1->FileName;
 	Manager::save_colony(colony, str);
-	Timer2->Enabled = true;
+	Timer2->Enabled = tmp;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::N6Click(TObject *Sender)
@@ -139,20 +144,22 @@ void __fastcall TForm1::N9Click(TObject *Sender)
 
 void __fastcall TForm1::N10Click(TObject *Sender)
 {
+	tmp = Timer2->Enabled;
 	Timer2->Enabled = false;
 	if (ColorDialog1->Execute()) {
 		grid.setColor(ColorDialog1->Color);
 	}
-	Timer2->Enabled = true;
+	Timer2->Enabled = tmp;
 }
 //---------------------------------------------------------------------------
 
 
 void __fastcall TForm1::N2Click(TObject *Sender)
 {
+	tmp = Timer2->Enabled;
 	Timer2->Enabled = false;
 	Form2->ShowModal();
-	Timer2->Enabled = true;
+	Timer2->Enabled = tmp;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormResize(TObject *Sender)
@@ -163,9 +170,10 @@ void __fastcall TForm1::FormResize(TObject *Sender)
 
 void __fastcall TForm1::N12Click(TObject *Sender)
 {
+	tmp = Timer2->Enabled;
 	Timer2->Enabled = false;
 	Form3->ShowModal();
-	Timer2->Enabled = true;
+	Timer2->Enabled = tmp;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::PaintBox1Paint(TObject *Sender)
