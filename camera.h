@@ -19,9 +19,9 @@ public:
     void MoveByKey(Qt::Key key);
 	double getScale() { return scale; }
 private:
+    static const int keyStep = 10;
 	vec2d beforeZoom, afterZoom;
 	vec2d offset;
 	vec2d lastMousePosition;
 	double scale;
-	static const int keyStep = 10;
 };

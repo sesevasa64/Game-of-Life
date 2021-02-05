@@ -2,7 +2,7 @@
 #include <cmath>
 
 Grid::Grid(Camera* cam)
-    : brush(Qt::white)
+    : brush(Qt::red)
     , cam(cam)
     , p(1)
 {
@@ -70,7 +70,6 @@ void Grid::drawCell(QPainter *painter, std::shared_ptr<Cell> cell) {
 	vec2i c2 = cell->p2 * cell_size;
 	vec2i a = cam->toCamera(c1);
 	vec2i b = cam->toCamera(c2);
-    QBrush brush(Qt::GlobalColor::red);
     QPoint p1(a.x, a.y), p2(b.x, b.y);
     QRect r(p1, p2);
     painter->fillRect(r, brush);
@@ -78,8 +77,4 @@ void Grid::drawCell(QPainter *painter, std::shared_ptr<Cell> cell) {
 
 void Grid::setColor(QColor color) {
     brush.setColor(color);
-}
-
-void Grid::clear() {
-
 }

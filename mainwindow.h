@@ -13,6 +13,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+public slots:
+    void setSize(int size);
+    void setGeneration(int i);
+    void setScale(double scale);
+    void setStatus(QString str);
 private:
     Ui::MainWindow *ui;
 };

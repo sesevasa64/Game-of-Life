@@ -36,6 +36,7 @@ void MyWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     grid->draw(&painter, colony);
+    setFocus();
 }
 
 void MyWidget::mouseMoveEvent(QMouseEvent *event)
@@ -77,6 +78,8 @@ void MyWidget::wheelEvent(QWheelEvent *event)
     int delta = event->angleDelta().y();
     camera->Zoom(cursor, delta);
     grid->updateBorders(width(), height());
+    grid->updateSize(camera->getScale());
+    emit scaleChanged(camera->getScale());
 }
 
 void MyWidget::resizeEvent(QResizeEvent *event)
@@ -85,7 +88,32 @@ void MyWidget::resizeEvent(QResizeEvent *event)
     grid->updateBorders(size.width(), size.height());
 }
 
+void MyWidget::keyPressEvent(QKeyEvent * event)
+{
+    if(event->key() == Qt::Key::Key_P)
+    {
+        swapTime();
+    }
+}
+
 void MyWidget::tick()
 {
+    static int i = 0;
     colony->tick();
+    emit sizeChanged(colony->size());
+    emit newGeneration(++i);
+}
+
+void MyWidget::swapTime()
+{
+    if(colony_timer->isActive())
+    {
+        colony_timer->stop();
+        emit statusChanged("Пауза");
+    }
+    else
+    {
+        colony_timer->start();
+        emit statusChanged("Идет симуляция");
+    }
 }

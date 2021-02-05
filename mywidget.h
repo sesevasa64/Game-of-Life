@@ -15,9 +15,16 @@ public:
     void mousePressEvent(QMouseEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
+    void keyPressEvent(QKeyEvent * event) override;
 public slots:
     void tick();
+signals:
+    void sizeChanged(int size);
+    void newGeneration(int i);
+    void scaleChanged(double scale);
+    void statusChanged(QString str);
 private:
+    void swapTime();
     QTimer *colony_timer;
     QTimer *render_timer;
     Camera *camera;

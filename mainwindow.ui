@@ -64,7 +64,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Идет симуляция:</string>
+         <string>Идет симуляция</string>
         </property>
        </widget>
       </item>
