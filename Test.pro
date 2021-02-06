@@ -15,6 +15,7 @@ SOURCES += \
     grid.cpp \
     main.cpp \
     mainwindow.cpp \
+    manager.cpp \
     mywidget.cpp \
     vec.cpp
 
@@ -24,6 +25,7 @@ HEADERS += \
     colony.h \
     grid.h \
     mainwindow.h \
+    manager.h \
     mywidget.h \
     vec.h
 

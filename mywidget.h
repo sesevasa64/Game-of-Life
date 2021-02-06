@@ -18,13 +18,21 @@ public:
     void keyPressEvent(QKeyEvent * event) override;
 public slots:
     void tick();
+    void swapTime();
+    void eraseAll();
+    void speedUp();
+    void speedDown();
+    void setColor();
+    void saveColony();
+    void loadColony();
 signals:
     void sizeChanged(int size);
     void newGeneration(int i);
     void scaleChanged(double scale);
     void statusChanged(QString str);
+    void menuStatusChanged(QString str);
+    void intervalChanged(int interval);
 private:
-    void swapTime();
     QTimer *colony_timer;
     QTimer *render_timer;
     Camera *camera;

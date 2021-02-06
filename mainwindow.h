@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include <QMainWindow>
-#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,6 +17,8 @@ public slots:
     void setGeneration(int i);
     void setScale(double scale);
     void setStatus(QString str);
+    void setMenuStatus(QString str);
+    void setTimeInterval(int interval);
 private:
     Ui::MainWindow *ui;
 };

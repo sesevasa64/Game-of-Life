@@ -10,7 +10,17 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->widget, SIGNAL(sizeChanged(int)), this, SLOT(setSize(int)));
     connect(ui->widget, SIGNAL(newGeneration(int)), this, SLOT(setGeneration(int)));
     connect(ui->widget, SIGNAL(scaleChanged(double)), this, SLOT(setScale(double)));
+    connect(ui->widget, SIGNAL(intervalChanged(int)), this, SLOT(setTimeInterval(int)));
     connect(ui->widget, SIGNAL(statusChanged(QString)), this, SLOT(setStatus(QString)));
+    connect(ui->widget, SIGNAL(menuStatusChanged(QString)), this, SLOT(setMenuStatus(QString)));
+
+    connect(ui->action_9, SIGNAL(triggered()), ui->widget, SLOT(setColor()));
+    connect(ui->action_3, SIGNAL(triggered()), ui->widget, SLOT(swapTime()));
+    connect(ui->action_8, SIGNAL(triggered()), ui->widget, SLOT(eraseAll()));
+    connect(ui->action, SIGNAL(triggered()), ui->widget, SLOT(speedUp()));
+    connect(ui->action_2, SIGNAL(triggered()), ui->widget, SLOT(speedDown()));
+    connect(ui->action_6, SIGNAL(triggered()), ui->widget, SLOT(loadColony()));
+    connect(ui->action_7, SIGNAL(triggered()), ui->widget, SLOT(saveColony()));
 }
 
 MainWindow::~MainWindow()
@@ -38,8 +48,12 @@ void MainWindow::setStatus(QString str)
     ui->label_2->setText(str);
 }
 
-/*
-void MainWindow::setSpeed(QString str) {
-    ui->label_10->setText(str);
+void MainWindow::setMenuStatus(QString str)
+{
+    ui->action_3->setText(str);
 }
-*/
+
+void MainWindow::setTimeInterval(int interval)
+{
+    ui->label_10->setText(QString::number(interval));
+}

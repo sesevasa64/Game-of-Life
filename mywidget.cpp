@@ -1,4 +1,5 @@
 #include "mywidget.h"
+#include "manager.h"
 #include <QPainter>
 #include <QPaintEvent>
 #include <QMouseEvent>
@@ -7,6 +8,8 @@
 #include <QLayout>
 #include <QHBoxLayout>
 #include <QDebug>
+#include <QColorDialog>
+#include <QFileDialog>
 
 MyWidget::MyWidget(QWidget *parent)
     : QWidget(parent)
@@ -21,6 +24,7 @@ MyWidget::MyWidget(QWidget *parent)
     colony_timer->start(1000);
     render_timer->start(1000 / 60.);
     setMouseTracking(true);
+    setFocus();
 }
 
 MyWidget::~MyWidget()
@@ -36,7 +40,6 @@ void MyWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     grid->draw(&painter, colony);
-    setFocus();
 }
 
 void MyWidget::mouseMoveEvent(QMouseEvent *event)
@@ -90,9 +93,18 @@ void MyWidget::resizeEvent(QResizeEvent *event)
 
 void MyWidget::keyPressEvent(QKeyEvent * event)
 {
-    if(event->key() == Qt::Key::Key_P)
+    int key = event->key();
+    if(key == Qt::Key::Key_P || key == 1047)
     {
         swapTime();
+    }
+    else if(key == Qt::Key::Key_Equal)
+    {
+        speedUp();
+    }
+    else if(key == Qt::Key::Key_Minus)
+    {
+        speedDown();
     }
 }
 
@@ -110,10 +122,55 @@ void MyWidget::swapTime()
     {
         colony_timer->stop();
         emit statusChanged("Пауза");
+        emit menuStatusChanged("Возобновить");
     }
     else
     {
         colony_timer->start();
         emit statusChanged("Идет симуляция");
+        emit menuStatusChanged("Пауза");
     }
+}
+
+void MyWidget::speedUp()
+{
+    int interval = colony_timer->interval() - 250;
+    colony_timer->setInterval(interval);
+    emit intervalChanged(interval);
+}
+
+void MyWidget::speedDown()
+{
+    int interval = colony_timer->interval() + 250;
+    colony_timer->setInterval(interval);
+    emit intervalChanged(interval);
+}
+
+void MyWidget::setColor()
+{
+    QColor color = QColorDialog::getColor();
+    if (color.isValid()) {
+        grid->setColor(color);
+    }
+}
+
+void MyWidget::saveColony()
+{
+    QString filename = QFileDialog::getSaveFileName();
+    if (!filename.isEmpty()) {
+        Manager::save_colony(*colony, filename);
+    }
+}
+
+void MyWidget::loadColony()
+{
+    QString filename = QFileDialog::getOpenFileName();
+    if (!filename.isEmpty()) {
+        *colony = Manager::load_colony(filename);
+    }
+}
+
+void MyWidget::eraseAll()
+{
+    (*colony) = Colony();
 }
