@@ -16,13 +16,6 @@ static vec2i dv[] = {
 
 void dummy(vec2i&) {}
 
-Colony::Colony(callback addCell, callback removeCell)
-    : whenCreate(addCell ? addCell : dummy),
-      whenRemove(removeCell ? removeCell : dummy)
-{
-
-}
-
 void Colony::tick() {
 	list<cell_it> to_erase;
 	list<vec2i> to_create;
@@ -51,7 +44,7 @@ void Colony::create(vec2i pos) {
 		neighbors[pos + dv[i]]++;
 	}
     cells.insert(pos);
-    whenCreate(pos);
+    emit cellAdded(pos);
 }
 
 void Colony::remove(vec2i pos) {
@@ -62,7 +55,7 @@ void Colony::remove(vec2i pos) {
         }
     }
     cells.erase(pos);
-    whenRemove(pos);
+    emit cellRemoved(pos);
 }
 
 void Colony::remove(cell_it it) {

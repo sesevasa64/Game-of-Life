@@ -4,14 +4,16 @@
 
 using VisualCells = std::unordered_map<vec2i, std::shared_ptr<VisualCell>, HashPoint, ComparePoint>;
 
-class CellCollection
+class CellCollection : public QObject
 {
+    Q_OBJECT
 public:
     CellCollection(Camera *camera);
-    void add(vec2i& pos);
-    void remove(vec2i& pos);
     void calculate();
     void draw(QPainter *painter);
+public slots:
+    void add(vec2i& pos);
+    void remove(vec2i& pos);
 private:
     int cellSize = 40;
     VisualCells visualCells;

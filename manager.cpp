@@ -2,6 +2,7 @@
 #include "manager.h"
 using namespace std;
 
+/*
 Colony Manager::load_colony(QString file_name) {
 	vec2i p;
 	Colony colony;
@@ -9,7 +10,7 @@ Colony Manager::load_colony(QString file_name) {
 	while (file >> p.x >> p.y) {
 		colony.create(p);
 	}
-	return colony;
+    return colony;
 }
 
 void Manager::save_colony(Colony& colony, QString file_name) {
@@ -18,3 +19,4 @@ void Manager::save_colony(Colony& colony, QString file_name) {
         file << it->x << ' ' << it->y << endl;
 	}
 }
+*/

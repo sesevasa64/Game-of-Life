@@ -1,4 +1,5 @@
 #include "cellcollection.h"
+#include <QDebug>
 
 CellCollection::CellCollection(Camera *camera)
     : camera(camera)

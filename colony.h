@@ -3,14 +3,14 @@
 #include <functional>
 #include <memory>
 #include "vec.h"
+#include <QObject>
 
 using cell_it = std::unordered_set<vec2i, HashPoint, ComparePoint>::iterator;
 using const_cell_it = std::unordered_set<vec2i, HashPoint, ComparePoint>::const_iterator;
-using callback = std::function<void(vec2i&)>;
 
-class Colony {
+class Colony : public QObject {
+    Q_OBJECT
 public:
-    Colony(callback addCell = nullptr, callback removeCell = nullptr);
 	void tick();
 	void create(vec2i pos);
 	void remove(vec2i pos);
@@ -19,8 +19,10 @@ public:
 	const_cell_it begin();
 	const_cell_it end();
 	size_t size();
+signals:
+    void cellAdded(vec2i&);
+    void cellRemoved(vec2i&);
 private:
     std::unordered_set<vec2i, HashPoint, ComparePoint> cells;
     std::unordered_map<vec2i, int, HashPoint, ComparePoint> neighbors;
-    callback whenCreate, whenRemove;
 };
