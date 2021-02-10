@@ -34,12 +34,6 @@ void Grid::updateSize(double scale) {
 	}
 }
 
-void Grid::draw(QPainter *painter, Colony *colony)
-{
-    drawGrid(painter);
-    drawColony(painter, colony);
-}
-
 void Grid::drawGrid(QPainter *painter) {
     if (grid_size == 0) return;
     for (int x = w1.x; x < w2.x; x += grid_size) {
@@ -54,22 +48,6 @@ void Grid::drawGrid(QPainter *painter) {
         vec2i c2 = cam->toCamera(p2);
         painter->drawLine(c1.x, c1.y, c2.x, c2.y);
     }
-}
-
-void Grid::drawColony(QPainter *painter, Colony* colony) {
-	for (const_cell_it it = colony->begin(); it != colony->end(); it++) {
-        drawCell(painter, it->second);
-	}
-}
-
-void Grid::drawCell(QPainter *painter, std::shared_ptr<Cell> cell) {
-    vec2i a = cell->p1 * cell_size;
-    vec2i b = cell->p2 * cell_size;
-    vec2i c1 = cam->toCamera(a);
-    vec2i c2 = cam->toCamera(b);
-    QPoint p1(c1.x, c1.y), p2(c2.x, c2.y);
-    QRect r(p1, p2);
-    painter->fillRect(r, brush);
 }
 
 void Grid::setColor(QColor color) {

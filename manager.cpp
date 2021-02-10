@@ -15,6 +15,6 @@ Colony Manager::load_colony(QString file_name) {
 void Manager::save_colony(Colony& colony, QString file_name) {
     ofstream file(file_name.toStdString());
 	for (const_cell_it it = colony.begin(); it != colony.end(); it++) {
-		file << it->first.x << ' ' << it->first.y << endl;
+        file << it->x << ' ' << it->y << endl;
 	}
 }

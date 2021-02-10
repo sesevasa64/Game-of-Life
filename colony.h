@@ -1,15 +1,16 @@
 #pragma once
-#include <unordered_map>
+#include <unordered_set>
+#include <functional>
 #include <memory>
 #include "vec.h"
-#include "cell.h"
 
-using cell_it = std::unordered_map<vec2i, std::shared_ptr<Cell>, HashPoint, ComparePoint>::iterator;
-using const_cell_it = std::unordered_map<vec2i, std::shared_ptr<Cell>, HashPoint, ComparePoint>::const_iterator;
+using cell_it = std::unordered_set<vec2i, HashPoint, ComparePoint>::iterator;
+using const_cell_it = std::unordered_set<vec2i, HashPoint, ComparePoint>::const_iterator;
+using callback = std::function<void(vec2i&)>;
 
 class Colony {
 public:
-	Colony() {}
+    Colony(callback addCell = nullptr, callback removeCell = nullptr);
 	void tick();
 	void create(vec2i pos);
 	void remove(vec2i pos);
@@ -19,6 +20,7 @@ public:
 	const_cell_it end();
 	size_t size();
 private:
-	std::unordered_map<vec2i, std::shared_ptr<Cell>, HashPoint, ComparePoint> cells;
-	std::unordered_map<vec2i, int, HashPoint, ComparePoint> neighbors;
+    std::unordered_set<vec2i, HashPoint, ComparePoint> cells;
+    std::unordered_map<vec2i, int, HashPoint, ComparePoint> neighbors;
+    callback whenCreate, whenRemove;
 };

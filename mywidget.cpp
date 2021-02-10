@@ -16,15 +16,21 @@ MyWidget::MyWidget(QWidget *parent)
     , colony_timer(new QTimer)
     , render_timer(new QTimer)
     , camera(new Camera)
-    , colony(new Colony)
     , grid(new Grid(camera))
+    , cellCollection(new CellCollection(camera))
 {
+    callback add = std::bind(&CellCollection::add, cellCollection, std::placeholders::_1);
+    callback remove = std::bind(&CellCollection::remove, cellCollection, std::placeholders::_1);
+    colony = new Colony(add, remove);
+
     connect(colony_timer, SIGNAL(timeout()), this, SLOT(tick()));
     connect(render_timer, SIGNAL(timeout()), this, SLOT(update()));
     colony_timer->start(1000);
     render_timer->start(1000 / 60.);
     setMouseTracking(true);
     setFocus();
+
+    timer.start();
 }
 
 MyWidget::~MyWidget()
@@ -33,13 +39,19 @@ MyWidget::~MyWidget()
    delete render_timer;
    delete grid;
    delete colony;
+   delete cellCollection;
    delete camera;
 }
 
 void MyWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    grid->draw(&painter, colony);
+    //grid->draw(&painter, colony);
+    grid->drawGrid(&painter);
+    cellCollection->draw(&painter);
+
+    qInfo() << 1000. / timer.elapsed();
+    timer.restart();
 }
 
 void MyWidget::mouseMoveEvent(QMouseEvent *event)
@@ -50,6 +62,7 @@ void MyWidget::mouseMoveEvent(QMouseEvent *event)
        camera->SetMousePosition(cursor);
     }
     grid->updateBorders(width(), height());
+    cellCollection->calculate();
 }
 
 void MyWidget::mousePressEvent(QMouseEvent *event)
@@ -82,6 +95,7 @@ void MyWidget::wheelEvent(QWheelEvent *event)
     camera->Zoom(cursor, delta);
     grid->updateBorders(width(), height());
     grid->updateSize(camera->getScale());
+    cellCollection->calculate();
     emit scaleChanged(camera->getScale());
 }
 
@@ -89,6 +103,7 @@ void MyWidget::resizeEvent(QResizeEvent *event)
 {
     QSize size = event->size();
     grid->updateBorders(size.width(), size.height());
+    cellCollection->calculate();
 }
 
 void MyWidget::keyPressEvent(QKeyEvent * event)

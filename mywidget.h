@@ -2,7 +2,9 @@
 #define MYWIDGET_H
 #include <QWidget>
 #include <QTimer>
+#include <QElapsedTimer>
 #include "grid.h"
+#include "cellcollection.h"
 
 class MyWidget : public QWidget
 {
@@ -38,6 +40,8 @@ private:
     Camera *camera;
     Colony *colony;
     Grid *grid;
+    CellCollection *cellCollection;
+    QElapsedTimer timer;
 };
 
 #endif // MYWIDGET_H

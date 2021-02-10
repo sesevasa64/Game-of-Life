@@ -14,11 +14,20 @@ static vec2i dv[] = {
 	vec2i(-1,  1), vec2i(0,  1)
 };
 
+void dummy(vec2i&) {}
+
+Colony::Colony(callback addCell, callback removeCell)
+    : whenCreate(addCell ? addCell : dummy),
+      whenRemove(removeCell ? removeCell : dummy)
+{
+
+}
+
 void Colony::tick() {
 	list<cell_it> to_erase;
 	list<vec2i> to_create;
 	for (cell_it it = cells.begin(); it != cells.end(); it++) {
-		int count = neighbors[it->first];
+        int count = neighbors[*it];
 		if (count < 2 || 3 < count) {
 			to_erase.push_back(it);
 		}
@@ -41,21 +50,23 @@ void Colony::create(vec2i pos) {
 	for (int i = 0; i < 8; i++) {
 		neighbors[pos + dv[i]]++;
 	}
-	cells[pos] = make_shared<Cell>(pos);
+    cells.insert(pos);
+    whenCreate(pos);
 }
 
 void Colony::remove(vec2i pos) {
-	remove(cells.find(pos));
+    for (int i = 0; i < 8; i++) {
+        vec2i key = pos + dv[i];
+        if (--neighbors[key] == 0) {
+            neighbors.erase(key);
+        }
+    }
+    cells.erase(pos);
+    whenRemove(pos);
 }
 
 void Colony::remove(cell_it it) {
-	for (int i = 0; i < 8; i++) {
-		vec2i key = it->first + dv[i];
-		if (--neighbors[key] == 0) {
-			neighbors.erase(key);
-		}
-	}
-	cells.erase(it);
+    remove(*it);
 }
 
 bool Colony::isExist(vec2i pos) {

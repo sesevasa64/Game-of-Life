@@ -11,24 +11,26 @@ RC_ICONS = icon.ico
 
 SOURCES += \
     camera.cpp \
-    cell.cpp \
+    cellcollection.cpp \
     colony.cpp \
     grid.cpp \
     main.cpp \
     mainwindow.cpp \
     manager.cpp \
     mywidget.cpp \
-    vec.cpp
+    vec.cpp \
+    visualcell.cpp
 
 HEADERS += \
     camera.h \
-    cell.h \
+    cellcollection.h \
     colony.h \
     grid.h \
     mainwindow.h \
     manager.h \
     mywidget.h \
-    vec.h
+    vec.h \
+    visualcell.h
 
 FORMS += \
     mainwindow.ui

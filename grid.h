@@ -11,11 +11,8 @@ public:
 	void updateBorders(int Width, int Height);
 	void updateSize(double scale);
     void setColor(QColor color);
-    void draw(QPainter *painter, Colony* colony);
-private:
     void drawGrid(QPainter *painter);
-    void drawCell(QPainter *painter, std::shared_ptr<Cell> cell);
-    void drawColony(QPainter *painter, Colony* colony);
+private:
     QBrush brush;
     Camera *cam;
 	vec2i w1, w2;
