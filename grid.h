@@ -19,5 +19,5 @@ private:
     QBrush brush;
     Camera *cam;
 	vec2i w1, w2;
-	int p;
+    int grid_size;
 };

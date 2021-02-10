@@ -4,8 +4,8 @@
 #include "vec.h"
 #include "cell.h"
 
-typedef std::unordered_map<vec2i, std::shared_ptr<Cell>, HashPoint, ComparePoint>::iterator cell_it;
-typedef std::unordered_map<vec2i, std::shared_ptr<Cell>, HashPoint, ComparePoint>::const_iterator const_cell_it;
+using cell_it = std::unordered_map<vec2i, std::shared_ptr<Cell>, HashPoint, ComparePoint>::iterator;
+using const_cell_it = std::unordered_map<vec2i, std::shared_ptr<Cell>, HashPoint, ComparePoint>::const_iterator;
 
 class Colony {
 public:

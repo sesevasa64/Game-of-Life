@@ -2,10 +2,10 @@
 #include <list>
 using namespace std;
 
-typedef unordered_map<vec2i, int, HashPoint, ComparePoint>::iterator n_it;
-typedef unordered_map<vec2i, bool, HashPoint, ComparePoint>::iterator vst_it;
-typedef list<cell_it>::iterator erase_it;
-typedef list<vec2i>::iterator create_it;
+using n_it = unordered_map<vec2i, int, HashPoint, ComparePoint>::iterator;
+using vst_it = unordered_map<vec2i, bool, HashPoint, ComparePoint>::iterator;
+using erase_it = list<cell_it>::iterator;
+using create_it = list<vec2i>::iterator;
 
 static vec2i dv[] = {
 	vec2i(1,  1), vec2i(1,  0),
