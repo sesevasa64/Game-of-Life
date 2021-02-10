@@ -25,6 +25,8 @@ MyWidget::MyWidget(QWidget *parent)
     render_timer->start(1000 / 60.);
     setMouseTracking(true);
     setFocus();
+
+    timer.start();
 }
 
 MyWidget::~MyWidget()
@@ -40,6 +42,15 @@ void MyWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     grid->draw(&painter, colony);
+
+    static int frames = 0;
+    frames++;
+    if (timer.elapsed() >= 1000) {
+        double fps = frames / ((double)timer.elapsed()/1000.0);
+        qInfo() << fps;
+        frames = 0;
+        timer.restart();
+    }
 }
 
 void MyWidget::mouseMoveEvent(QMouseEvent *event)
