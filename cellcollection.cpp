@@ -2,7 +2,8 @@
 #include <QDebug>
 
 CellCollection::CellCollection(Camera *camera)
-    : camera(camera)
+    : color(Qt::GlobalColor::red)
+    , camera(camera)
 {
 
 }
@@ -10,7 +11,7 @@ CellCollection::CellCollection(Camera *camera)
 void CellCollection::add(vec2i& pos)
 {
     vec2i p1 = pos * cellSize;
-    visualCells[pos] = std::make_shared<VisualCell>(p1, camera, cellSize);
+    visualCells[pos] = std::make_shared<VisualCell>(p1, camera, cellSize, &color);
 }
 
 void CellCollection::remove(vec2i& pos)
@@ -32,4 +33,8 @@ void CellCollection::draw(QPainter *painter)
     {
         val.second->draw(painter);
     }
+}
+
+void CellCollection::setColor(QColor color) {
+    this->color = color;
 }

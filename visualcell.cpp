@@ -1,7 +1,8 @@
 #include "visualcell.h"
 
-VisualCell::VisualCell(vec2i& pos, Camera *camera, int size)
-    : pos(pos)
+VisualCell::VisualCell(vec2i& pos, Camera *camera, int size, QColor *color)
+    : color(color)
+    , pos(pos)
 {
     calculate(camera, size);
 }
@@ -16,5 +17,6 @@ void VisualCell::calculate(Camera *camera, int size)
 
 void VisualCell::draw(QPainter *painter)
 {
-    painter->fillRect(rect, Qt::GlobalColor::red);
+    painter->fillRect(rect, *color);
 }
+

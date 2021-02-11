@@ -11,11 +11,13 @@ public:
     CellCollection(Camera *camera);
     void calculate();
     void draw(QPainter *painter);
+    void setColor(QColor color);
 public slots:
     void add(vec2i& pos);
     void remove(vec2i& pos);
 private:
     int cellSize = 40;
+    QColor color;
     VisualCells visualCells;
     Camera *camera;
 };

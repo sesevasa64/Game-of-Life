@@ -45,18 +45,18 @@ MyWidget::~MyWidget()
 void MyWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    //grid->draw(&painter, colony);
     grid->drawGrid(&painter);
     cellCollection->draw(&painter);
-
+    /*
     static int frames = 0;
     frames++;
     if (timer.elapsed() >= 1000) {
         double fps = frames / ((double)timer.elapsed()/1000.0);
-        qInfo() << fps;
+        qDebug() << fps;
         frames = 0;
         timer.restart();
     }
+    */
 }
 
 void MyWidget::mouseMoveEvent(QMouseEvent *event)
@@ -170,7 +170,7 @@ void MyWidget::setColor()
 {
     QColor color = QColorDialog::getColor();
     if (color.isValid()) {
-        grid->setColor(color);
+        cellCollection->setColor(color);
     }
 }
 

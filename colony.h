@@ -2,8 +2,8 @@
 #include <unordered_set>
 #include <functional>
 #include <memory>
-#include "vec.h"
 #include <QObject>
+#include "vec.h"
 
 using cell_it = std::unordered_set<vec2i, HashPoint, ComparePoint>::iterator;
 using const_cell_it = std::unordered_set<vec2i, HashPoint, ComparePoint>::const_iterator;

@@ -2,8 +2,7 @@
 #include <cmath>
 
 Grid::Grid(Camera* cam)
-    : brush(Qt::red)
-    , cam(cam)
+    : cam(cam)
     , grid_size(cell_size)
 {
 
@@ -48,8 +47,4 @@ void Grid::drawGrid(QPainter *painter) {
         vec2i c2 = cam->toCamera(p2);
         painter->drawLine(c1.x, c1.y, c2.x, c2.y);
     }
-}
-
-void Grid::setColor(QColor color) {
-    brush.setColor(color);
 }
