@@ -16,20 +16,18 @@ MyWidget::MyWidget(QWidget *parent)
     , colony_timer(new QTimer)
     , render_timer(new QTimer)
     , camera(new Camera)
-    , colony(new Colony)
     , grid(new Grid(camera))
     , cellCollection(new CellCollection(camera))
 {
+    colony = new Colony(cellCollection->add, cellCollection->remove);
     connect(colony_timer, SIGNAL(timeout()), this, SLOT(tick()));
     connect(render_timer, SIGNAL(timeout()), this, SLOT(update()));
-    connect(colony, SIGNAL(cellAdded(vec2i&)), cellCollection, SLOT(add(vec2i&)));
-    connect(colony, SIGNAL(cellRemoved(vec2i&)), cellCollection, SLOT(remove(vec2i&)));
     colony_timer->start(1000);
     render_timer->start(1000 / 60.);
     setMouseTracking(true);
     setFocus();
 
-    timer.start();
+    //timer.start();
 }
 
 MyWidget::~MyWidget()
@@ -178,7 +176,7 @@ void MyWidget::saveColony()
 {
     QString filename = QFileDialog::getSaveFileName();
     if (!filename.isEmpty()) {
-        //Manager::save_colony(*colony, filename);
+        Manager::save_colony(colony, filename);
     }
 }
 
@@ -186,11 +184,11 @@ void MyWidget::loadColony()
 {
     QString filename = QFileDialog::getOpenFileName();
     if (!filename.isEmpty()) {
-        //*colony = Manager::load_colony(filename);
+        Manager::load_colony(colony, filename);
     }
 }
 
 void MyWidget::eraseAll()
 {
-    //(*colony) = Colony();
+    colony->eraseAll();
 }

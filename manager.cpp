@@ -2,21 +2,19 @@
 #include "manager.h"
 using namespace std;
 
-/*
-Colony Manager::load_colony(QString file_name) {
+void Manager::load_colony(Colony *colony, QString file_name) {
 	vec2i p;
-	Colony colony;
+    colony->eraseAll();
     ifstream file(file_name.toStdString());
 	while (file >> p.x >> p.y) {
-		colony.create(p);
+        colony->create(p);
 	}
-    return colony;
 }
 
-void Manager::save_colony(Colony& colony, QString file_name) {
+void Manager::save_colony(Colony *colony, QString file_name) {
     ofstream file(file_name.toStdString());
-	for (const_cell_it it = colony.begin(); it != colony.end(); it++) {
+    for (const_cell_it it = colony->begin(); it != colony->end(); it++) {
         file << it->x << ' ' << it->y << endl;
 	}
 }
-*/
+

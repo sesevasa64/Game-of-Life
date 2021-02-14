@@ -2,19 +2,21 @@
 #include <QDebug>
 
 CellCollection::CellCollection(Camera *camera)
-    : color(Qt::GlobalColor::red)
+    : add(std::bind(&CellCollection::whenAdd, this, std::placeholders::_1))
+    , remove(std::bind(&CellCollection::whenRemove, this, std::placeholders::_1))
+    , color(Qt::GlobalColor::red)
     , camera(camera)
 {
 
 }
 
-void CellCollection::add(vec2i& pos)
+void CellCollection::whenAdd(vec2i& pos)
 {
     vec2i p1 = pos * cellSize;
     visualCells[pos] = std::make_shared<VisualCell>(p1, camera, cellSize, &color);
 }
 
-void CellCollection::remove(vec2i& pos)
+void CellCollection::whenRemove(vec2i& pos)
 {
     visualCells.erase(pos);
 }
