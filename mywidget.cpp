@@ -26,8 +26,6 @@ MyWidget::MyWidget(QWidget *parent)
     render_timer->start(1000 / 60.);
     setMouseTracking(true);
     setFocus();
-
-    //timer.start();
 }
 
 MyWidget::~MyWidget()
@@ -45,16 +43,6 @@ void MyWidget::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     grid->drawGrid(&painter);
     cellCollection->draw(&painter);
-    /*
-    static int frames = 0;
-    frames++;
-    if (timer.elapsed() >= 1000) {
-        double fps = frames / ((double)timer.elapsed()/1000.0);
-        qDebug() << fps;
-        frames = 0;
-        timer.restart();
-    }
-    */
 }
 
 void MyWidget::mouseMoveEvent(QMouseEvent *event)
@@ -63,9 +51,9 @@ void MyWidget::mouseMoveEvent(QMouseEvent *event)
     if (event->buttons() == Qt::LeftButton) {
        camera->Move(cursor);
        camera->SetMousePosition(cursor);
+       grid->update(width(), height());
+       cellCollection->calculate();
     }
-    grid->updateBorders(width(), height());
-    cellCollection->calculate();
 }
 
 void MyWidget::mousePressEvent(QMouseEvent *event)
@@ -79,7 +67,7 @@ void MyWidget::mousePressEvent(QMouseEvent *event)
     else if (button == Qt::MouseButton::RightButton)
     {
         vec2d c(cursor.x(), cursor.y());
-        vec2i pos = camera->toWorld(c);
+        vec2i pos = vec2i(camera->toWorld(c));
         pos.x = floor(pos.x / double(grid->cell_size));
         pos.y = floor(pos.y / double(grid->cell_size));
         if (colony->isExist(pos)) {
@@ -96,8 +84,8 @@ void MyWidget::wheelEvent(QWheelEvent *event)
     QPoint cursor = mapFromGlobal(QCursor::pos());
     int delta = event->angleDelta().y();
     camera->Zoom(cursor, delta);
-    grid->updateBorders(width(), height());
-    grid->updateSize(camera->getScale());
+    grid->setSize(camera->getScale());
+    grid->update(width(), height());
     cellCollection->calculate();
     emit scaleChanged(camera->getScale());
 }
@@ -105,7 +93,7 @@ void MyWidget::wheelEvent(QWheelEvent *event)
 void MyWidget::resizeEvent(QResizeEvent *event)
 {
     QSize size = event->size();
-    grid->updateBorders(size.width(), size.height());
+    grid->update(size.width(), size.height());
     cellCollection->calculate();
 }
 

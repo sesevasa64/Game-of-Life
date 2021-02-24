@@ -7,11 +7,6 @@ public:
 	vec2<T>() : x(), y() {}
 	vec2<T>(T x, T y) : x(x), y(y) {}
 	template<typename U>
-	vec2<T>(const vec2<U>& v) : x(v.x), y(v.y) {}
-	vec2<T> operator-(const vec2<T>& v) {
-		return vec2<T>(x - v.x, y - v.y);
-	}
-	template<typename U>
 	vec2<T>& operator+=(const vec2<U>& v) {
 		x += v.x;
 		y += v.y;
@@ -23,14 +18,10 @@ public:
 		y -= v.y;
 		return *this;
 	}
-	template<typename U>
-	vec2<U> operator*(U scalar) {
-		return vec2<U>(x * scalar, y * scalar);
-	}
-	template<typename U>
-	vec2<U> operator/(U scalar) {
-		return vec2<U>(x / scalar, y / scalar);
-	}
+    template<typename U>
+    explicit operator vec2<U>() {
+        return vec2<U>(x, y);
+    }
 	T x, y;
 };
 
@@ -38,13 +29,24 @@ typedef vec2<int> vec2i;
 typedef vec2<float> vec2f;
 typedef vec2<double> vec2d;
 
-template<typename T>
-vec2<T> operator+(const vec2<T>&& lhs, const vec2<T>&& rhs) {
-	return vec2<T>(lhs.x + rhs.x, lhs.y + rhs.y);
+template<typename T, typename U>
+auto operator+(const vec2<T>& lhs, const vec2<U>& rhs) {
+    return vec2<decltype(lhs.x + rhs.x)>(lhs.x + rhs.x, lhs.y + rhs.y);
 }
-template<typename T>
-vec2<T> operator+(vec2<T> lhs, vec2<T>& rhs) {
-	return vec2<T>(lhs.x + rhs.x, lhs.y + rhs.y);
+
+template<typename T, typename U>
+auto operator-(const vec2<T>& lhs, const vec2<U>& rhs) {
+    return vec2<decltype(lhs.x - rhs.x)>(lhs.x - rhs.x, lhs.y - rhs.y);
+}
+
+template<typename T, typename U>
+auto operator*(const vec2<T>& lhs, U scalar) {
+    return vec2<decltype(lhs.x * scalar)>(lhs.x * scalar, lhs.y * scalar);
+}
+
+template<typename T, typename U>
+auto operator/(const vec2<T>& lhs, U scalar) {
+    return vec2<decltype(lhs.x / scalar)>(lhs.x / scalar, lhs.y / scalar);
 }
 
 class HashPoint {

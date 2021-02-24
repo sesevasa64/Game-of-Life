@@ -14,8 +14,8 @@ public:
     void setColor(QColor color);
     const callback add, remove;
 private:
-    void whenAdd(vec2i& pos);
-    void whenRemove(vec2i& pos);
+    void whenAdd(const vec2i& pos);
+    void whenRemove(const vec2i& pos);
     int cellSize = 40;
     QColor color;
     VisualCells visualCells;

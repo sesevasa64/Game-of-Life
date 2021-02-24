@@ -5,12 +5,12 @@
 class Camera {
 public:
 	Camera() : scale(1.0) {}
-	template<class T>
-	vec2<T> toWorld(vec2<T>& cam) {
+    template<class T>
+    auto toWorld(vec2<T>& cam) {
 		return (cam / scale) + offset;
 	}
-	template<class T>
-	vec2<T> toCamera(vec2<T>& world) {
+    template<class T>
+    auto toCamera(vec2<T>& world) {
 		return (world - offset) * scale;
 	}
     void SetMousePosition(QPoint& pos);

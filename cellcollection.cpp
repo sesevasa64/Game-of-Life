@@ -10,13 +10,13 @@ CellCollection::CellCollection(Camera *camera)
 
 }
 
-void CellCollection::whenAdd(vec2i& pos)
+void CellCollection::whenAdd(const vec2i& pos)
 {
-    vec2i p1 = pos * cellSize;
+    vec2i p1(pos.x * cellSize, pos.y * cellSize);
     visualCells[pos] = std::make_shared<VisualCell>(p1, camera, cellSize, &color);
 }
 
-void CellCollection::whenRemove(vec2i& pos)
+void CellCollection::whenRemove(const vec2i& pos)
 {
     visualCells.erase(pos);
 }
